@@ -7,13 +7,9 @@ namespace SEAMOrderStoreSystem.Entities
 {
     public class Product
     {
-        
-        
-
         public int id { get; }
         public string name { get; set;}
         public decimal price { get; set; }
-
         public string category { get; set; }
         public string manufacturer { get; set;}
         public string supplier { get; set; }
@@ -24,9 +20,6 @@ namespace SEAMOrderStoreSystem.Entities
         public int reorderLevel { get; set; }
         public int targetStock { get; set; }
         public string status { get; set; }
-        
-
-        
 
         public Product(int id, string name, decimal price, string category, string manufacturer, string supplier, string description, string comment, string location, int stock, int reorderLevel, int targetStock, string status)
         {
@@ -45,10 +38,6 @@ namespace SEAMOrderStoreSystem.Entities
             this.status = status;
             
         }
-
-        
-        
-        
 
     }
 }

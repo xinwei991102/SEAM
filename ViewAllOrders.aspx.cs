@@ -64,10 +64,10 @@ namespace SEAMOrderStoreSystem
             foreach (Order order in orders)
             {
                 decimal total = 0;
-                foreach (OrderQTY orderQTY in db.orderQTies.Where(x => x.orderID == order.id))
+                foreach (OrderLine orderLine in db.orderLines.Where(x => x.orderID == order.id))
                 {
-                    Product product = db.products.Single(x => x.id == orderQTY.productID);
-                    total += orderQTY.quantity * product.price * (1 - orderQTY.discount);
+                    Product product = db.products.Single(x => x.id == orderLine.productID);
+                    total += orderLine.quantity * product.price * (1 - orderLine.discount);
                 }
                 OrderTotal orderTotal = new OrderTotal(order, total);
                 orderTotals.Add(orderTotal);

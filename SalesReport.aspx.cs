@@ -48,10 +48,10 @@ namespace SEAMOrderStoreSystem
             string year = txtYear.Text;
 
             List<Order> orders = db.orders.Where(x => x.date.ToShortDateString().Contains(month + year)).ToList();
-            List<OrderQTY> orderQTies = new List<OrderQTY>();
+            List<OrderLine> orderLines = new List<OrderLine>();
             foreach(Order ord in orders)
             {
-                orderQTies.AddRange(db.orderQTies.Where(x => x.orderID == ord.id));
+                orderLines.AddRange(db.orderLines.Where(x => x.orderID == ord.id));
 
             }
 
@@ -59,7 +59,7 @@ namespace SEAMOrderStoreSystem
           
             List<ProdSales> prodSales = new List<ProdSales>();
 
-            foreach (var prodOrder in orderQTies)
+            foreach (var prodOrder in orderLines)
             {
                 Product prod = db.products.Single(x => x.id == prodOrder.productID);
                 if (prodSales.Count(x => x.name == prod.name) == 0)

@@ -19,7 +19,8 @@ namespace SEAMOrderStoreSystem.DataAcesss
         public List<Product> products = new List<Product>();
         public List<Staff> staffs = new List<Staff>();
         public List<Order> orders = new List<Order>();
-        public List<OrderQTY> orderQTies = new List<OrderQTY>();
+        public List<OrderLine> orderLines = new List<OrderLine>();
+        public List<Salesman> salesmen = new List<Salesman>();
 
         private DatabaseContext()
         {
@@ -28,9 +29,10 @@ namespace SEAMOrderStoreSystem.DataAcesss
             loadProducts();
             loadStaffs();
             loadOrders();
-            loadOrderQties();
-            
+            loadOrderLines();
+            loadSalesmen();
         }
+
 
         public static DatabaseContext getContext()
         {
@@ -41,9 +43,9 @@ namespace SEAMOrderStoreSystem.DataAcesss
             return dbContext;
         }
 
-        private void loadOrderQties()
+        private void loadOrderLines()
         {
-            var rs = session.Execute("select * from orderqty");
+            var rs = session.Execute("select * from orderline");
             foreach (var row in rs)
             {
 
@@ -51,8 +53,8 @@ namespace SEAMOrderStoreSystem.DataAcesss
                 int productID = row.GetValue<int>("product_id");
                 int quantity = row.GetValue<int>("quantity");
                 decimal discount = row.GetValue<decimal>("discount");
-                OrderQTY orderQTY = new OrderQTY(orderID, productID, quantity, discount);
-                orderQTies.Add(orderQTY);
+                OrderLine orderLine = new OrderLine(orderID, productID, quantity, discount);
+                orderLines.Add(orderLine);
 
             }
         }
@@ -68,7 +70,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
                 string custEmail = row.GetValue<string>("cust_email");
                 string custAddress = row.GetValue<string>("cust_address");
                 string status = row.GetValue<string>("status");
-                string staffName = row.GetValue<string>("staff_name");
+                string staffName = row.GetValue<string>("salesman_name");
                 Order order = new Order(id,date, custName, custEmail, custAddress, status, staffName);
                 orders.Add(order);
 
@@ -116,7 +118,16 @@ namespace SEAMOrderStoreSystem.DataAcesss
             }
         }
 
-        
+        private void loadSalesmen()
+        {
+            var rs = session.Execute("select * from salesman");
+            foreach (var row in rs)
+            {
+                string name = row.GetValue<string>("name");
+                Salesman salesman = new Salesman(name);
+                salesmen.Add(salesman);
+            }
+        }
 
         public void updateProducts()
         {
@@ -143,7 +154,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
 
         public void updateOrders()
         {
-            var ps = session.Prepare("insert into ordert (id,order_date,cust_name,cust_email,cust_address,status,staff_name) values(?,?,?,?,?,?,?)");
+            var ps = session.Prepare("insert into ordert (id,order_date,cust_name,cust_email,cust_address,status,salesman_name) values(?,?,?,?,?,?,?)");
 
             foreach (var order in orders)
             {
@@ -152,13 +163,13 @@ namespace SEAMOrderStoreSystem.DataAcesss
             }
         }
 
-        public void updateOrderQTies()
+        public void updateOrderLines()
         {
-            var ps = session.Prepare("insert into orderqty (order_id,product_id,quantity,discount) values (?,?,?,?)");
+            var ps = session.Prepare("insert into orderline (order_id,product_id,quantity,discount) values (?,?,?,?)");
 
-            foreach (var orderQTY in orderQTies)
+            foreach (var orderLine in orderLines)
             {
-                var statement = ps.Bind(orderQTY.orderID,orderQTY.productID,orderQTY.quantity,orderQTY.discount);
+                var statement = ps.Bind(orderLine.orderID,orderLine.productID,orderLine.quantity,orderLine.discount);
                 session.Execute(statement);
             }
         }

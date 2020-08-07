@@ -279,8 +279,9 @@
     </Compile>
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderProd.cs" />
-    <Compile Include="Entities\OrderQTY.cs" />
+    <Compile Include="Entities\OrderLine.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Salesman.cs" />
     <Compile Include="Entities\Staff.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

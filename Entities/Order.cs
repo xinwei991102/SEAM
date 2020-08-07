@@ -15,8 +15,6 @@ namespace SEAMOrderStoreSystem.Entities
         public string status { get; set; }
         public string staffName { get; set; }
 
-        
-
         public Order(int id, DateTime date, string custName, string custEmail, string custAddress, string status, string staffName)
         {
             this.id = id;
@@ -29,8 +27,5 @@ namespace SEAMOrderStoreSystem.Entities
             
         }
 
-        
-
-       
     }
 }

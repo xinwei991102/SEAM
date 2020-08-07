@@ -96,15 +96,15 @@ namespace SEAMOrderStoreSystem
                     string[] quantity = Request.Form["quantity"].Split(',');
                     string[] discount = Request.Form["discount"].Split(',');
 
-                    List<OrderQTY> newOrderQTies = new List<OrderQTY>();
+                    List<OrderLine> newOrderLines = new List<OrderLine>();
                     //Loop through the values and insert into database table.
                     if(products.Length == quantity.Length && products.Length == discount.Length)
                     {
                         for(int i = 0; i<products.Length;i++)
                         {
                             Product prod = db.products.Single(x => x.name == products[i]);
-                            OrderQTY newOrderQTY = new OrderQTY(newOrder.id, prod.id, int.Parse(quantity[i]), decimal.Parse(discount[i]));
-                            newOrderQTies.Add(newOrderQTY);
+                            OrderLine newOrderQTY = new OrderLine(newOrder.id, prod.id, int.Parse(quantity[i]), decimal.Parse(discount[i]));
+                            newOrderLines.Add(newOrderQTY);
                         }
                     }
                     else
@@ -114,9 +114,9 @@ namespace SEAMOrderStoreSystem
                     }
 
                     db.orders.Add(newOrder);
-                    db.orderQTies.AddRange(newOrderQTies);
+                    db.orderLines.AddRange(newOrderLines);
                     db.updateOrders();
-                    db.updateOrderQTies();
+                    db.updateOrderLines();
 
                     
 

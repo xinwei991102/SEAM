@@ -22,7 +22,7 @@ namespace SEAMOrderStoreSystem
             {
                 orderID = int.Parse(Request.QueryString["OrderID"]);
                 Order order = db.orders.Single(x => x.id == orderID);
-                List<OrderQTY> orderQTies = db.orderQTies.Where(x => x.orderID == orderID).ToList();
+                List<OrderLine> orderLines = db.orderLines.Where(x => x.orderID == orderID).ToList();
 
                 txtOrderID.Text = "" + orderID;
                 txtDate.Text = order.date.ToString();
@@ -50,9 +50,9 @@ namespace SEAMOrderStoreSystem
 
                 decimal ttotal = 0;
                 List<OrderProd> orderProds = new List<OrderProd>();
-                for (int i = 0; i < orderQTies.Count; i++)
+                for (int i = 0; i < orderLines.Count; i++)
                 {
-                    OrderQTY orderQTY = orderQTies.ElementAt(i);
+                    OrderLine orderQTY = orderLines.ElementAt(i);
                     Product product = db.products.Single(x => x.id == orderQTY.productID);
                     string prod = product.name;
                     int qty = orderQTY.quantity;
@@ -107,7 +107,7 @@ namespace SEAMOrderStoreSystem
                 Product prod = db.products.Single(x => x.name == prodName);
                 int qty = int.Parse(((System.Web.UI.WebControls.TextBox)row.Cells[2].Controls[1]).Text);
                 decimal discount = decimal.Parse(((System.Web.UI.WebControls.TextBox)row.Cells[4].Controls[1]).Text);
-                OrderQTY orderQTY = db.orderQTies.Single(x => x.orderID == id && x.productID == prod.id);
+                OrderLine orderQTY = db.orderLines.Single(x => x.orderID == id && x.productID == prod.id);
                 orderQTY.quantity = qty;
                 orderQTY.discount = discount;
 
@@ -119,7 +119,7 @@ namespace SEAMOrderStoreSystem
                 }
 
             }
-            db.updateOrderQTies();
+            db.updateOrderLines();
             db.updateProducts();
 
             //popup
@@ -148,18 +148,14 @@ namespace SEAMOrderStoreSystem
         {
             int orderID = int.Parse(Request.QueryString["OrderID"]);
             Order order = db.orders.Single(x => x.id == orderID);
-            List<OrderQTY> orderQTies = db.orderQTies.Where(x => x.orderID == orderID).ToList();
-
-           
-            
-
+            List<OrderLine> orderLines = db.orderLines.Where(x => x.orderID == orderID).ToList();
             
 
             decimal ttotal = 0;
             List<OrderProd> orderProds = new List<OrderProd>();
-            for (int i = 0; i < orderQTies.Count; i++)
+            for (int i = 0; i < orderLines.Count; i++)
             {
-                OrderQTY orderQTY = orderQTies.ElementAt(i);
+                OrderLine orderQTY = orderLines.ElementAt(i);
                 Product product = db.products.Single(x => x.id == orderQTY.productID);
                 string prod = product.name;
                 int qty = orderQTY.quantity;
@@ -170,8 +166,6 @@ namespace SEAMOrderStoreSystem
                 orderProds.Add(orderProd);
                 ttotal += total;
             }
-
-
 
 
             //create html
