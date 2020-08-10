@@ -1,41 +1,33 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SEAMOrderStoreSystem._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="jumbotron">
-        <h1>Millos Trading's</h1>
-        <h1>Ordering and Store System</h1>
-        <p class="lead">123, Hill Street, 31000 Perak, Malaysia.</p>
-        <p class="lead">Tel: 605-5342353 Fax:605-5342352</p>
-        
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Order System</h2>
+    <h1 class="text-center my-4">Alimama Sdn Bhd Order and Store System</h1>
+    <div class="row text-center">
+        <div class="col-md border rounded p-4 mx-2">
+            <h2>Order Sub-system</h2>
             <p>
-                Create and manage daily order.
+                Create and manage daily orders.
             </p>
             <p>
-                <a class="btn btn-default" href="ViewAllOrders.aspx">View Order</a>
+                <a class="btn btn-primary" href="ViewAllOrders.aspx">View Orders</a>
             </p>
         </div>
-        <div class="col-md-4">
-            <h2>Store System</h2>
+        <div class="col-md border rounded p-4 mx-2">
+            <h2>Store Sub-system</h2>
             <p>
-                Add and manage inventory products.
+                Manage inventory products.
             </p>
             <p>
-                <a class="btn btn-default" href="">View Store</a>
+                <a class="btn btn-primary" href="ViewInventory.aspx">View Inventory</a>
             </p>
         </div>
-        <div class="col-md-4">
-            <h2>Staff System</h2>
+        <div class="col-md border rounded p-4 mx-2">
+            <h2>Staff Sub-system</h2>
             <p>
-                view and manage employees of the company.
+                Manage staff information.
             </p>
             <p>
-                <a class="btn btn-default" href="">View Staff</a>
+                <a class="btn btn-primary" href="ViewAllStaff.aspx">View Staff</a>
             </p>
         </div>
     </div>

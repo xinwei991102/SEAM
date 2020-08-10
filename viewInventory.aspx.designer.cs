@@ -11,7 +11,7 @@ namespace SEAMOrderStoreSystem
 {
 
 
-    public partial class viewInventory
+    public partial class ViewInventory
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace SEAMOrderStoreSystem
 {
-    public partial class ViewInventory : System.Web.UI.Page
+    public partial class ViewAllStaff : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

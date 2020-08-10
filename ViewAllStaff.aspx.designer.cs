@@ -11,7 +11,7 @@ namespace SEAMOrderStoreSystem
 {
 
 
-    public partial class Contact
+    public partial class ViewAllStaff
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewAllOrders.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewAllOrders" %>
+﻿<%@ Page Title="Orders" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewAllOrders.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewAllOrders" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="modal-container row">
         <h1 class="whiteText">All Orders</h1>
