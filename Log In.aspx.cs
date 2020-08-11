@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SEAMOrderStoreSystem.DataAcesss;
+using SEAMOrderStoreSystem.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +19,15 @@ namespace SEAMOrderStoreSystem
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
+            DatabaseContext db = DatabaseContext.getContext();
+            foreach (Staff staff in db.staffs)
+            {
+                if (Login1.UserName.Equals(staff.email) && Login1.Password.Equals(staff.password))
+                {
+                    FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
+                }
+            }
+           
         }
     }
 }
