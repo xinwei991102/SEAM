@@ -42,7 +42,7 @@ namespace SEAMOrderStoreSystem
 
         protected void gvOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int id = int.Parse(((Label)gvOrder.SelectedRow.Cells[1].Controls[1]).Text);
+            int id = int.Parse(((Label)gvOrder.SelectedRow.Cells[0].Controls[1]).Text);
             Response.Redirect("~/ViewOrderDetails.aspx?OrderID=" + id);
         }
 
@@ -64,7 +64,7 @@ namespace SEAMOrderStoreSystem
                 orders.AddRange(db.orders.Where(x => x.status == "canceled").ToList());
             }
 
-            orders = orders.Where(x => x.date.ToShortDateString().Contains(txtDate.Text) && x.staffName.Contains(txtStaff.Text) && x.custName.Contains(txtCustName.Text)).OrderBy(x => x.id).ToList();
+            orders = orders.Where(x => x.date.ToShortDateString().Contains(txtDate.Text) && x.salesmanName.Contains(txtStaff.Text) && x.custName.Contains(txtCustName.Text)).OrderBy(x => x.id).ToList();
 
 
             List<OrderTotal> orderTotals = new List<OrderTotal>();

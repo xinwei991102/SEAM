@@ -70,8 +70,8 @@ namespace SEAMOrderStoreSystem.DataAcesss
                 string custEmail = row.GetValue<string>("cust_email");
                 string custAddress = row.GetValue<string>("cust_address");
                 string status = row.GetValue<string>("status");
-                string staffName = row.GetValue<string>("salesman_name");
-                Order order = new Order(id,date, custName, custEmail, custAddress, status, staffName);
+                string salesmanName = row.GetValue<string>("salesman_name");
+                Order order = new Order(id,date, custName, custEmail, custAddress, status, salesmanName);
                 orders.Add(order);
 
             }
@@ -158,7 +158,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
 
             foreach (var order in orders)
             {
-                var statement = ps.Bind(order.id, new LocalDate(order.date.Year, order.date.Month, order.date.Day), order.custName,order.custEmail,order.custAddress,order.status,order.staffName);
+                var statement = ps.Bind(order.id, new LocalDate(order.date.Year, order.date.Month, order.date.Day), order.custName,order.custEmail,order.custAddress,order.status,order.salesmanName);
                 session.Execute(statement);
             }
         }

@@ -13,9 +13,9 @@ namespace SEAMOrderStoreSystem.Entities
         public string custEmail { get; set; }
         public string custAddress { get; set; }
         public string status { get; set; }
-        public string staffName { get; set; }
+        public string salesmanName { get; set; }
 
-        public Order(int id, DateTime date, string custName, string custEmail, string custAddress, string status, string staffName)
+        public Order(int id, DateTime date, string custName, string custEmail, string custAddress, string status, string salesmanName)
         {
             this.id = id;
             this.date = date;
@@ -23,7 +23,7 @@ namespace SEAMOrderStoreSystem.Entities
             this.custEmail = custEmail;
             this.custAddress = custAddress;
             this.status = status;
-            this.staffName = staffName;
+            this.salesmanName = salesmanName;
             
         }
 

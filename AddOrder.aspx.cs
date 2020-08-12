@@ -85,10 +85,9 @@ namespace SEAMOrderStoreSystem
                     string custAddress = txtCustAddress.Text;
                     string status = "pending";
 
-                    //string staffName = ((Staff)Session["loginUser"]).name;
-                    string staffName = ddlStaff.SelectedValue;
+                    string salesmanName = ddlStaff.SelectedValue;
 
-                    Order newOrder = new Order(orderID, date, custName, custEmail, custAddress, status, staffName);
+                    Order newOrder = new Order(orderID, date, custName, custEmail, custAddress, status, salesmanName);
 
 
                     //Fetch the Hidden Field values from the Request.Form collection.

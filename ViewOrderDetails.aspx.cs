@@ -26,7 +26,7 @@ namespace SEAMOrderStoreSystem
 
                 txtOrderID.Text = "" + orderID;
                 txtDate.Text = order.date.ToString();
-                txtStaff.Text = order.staffName;
+                txtStaff.Text = order.salesmanName;
                 if (order.status.Equals("pending"))
                 {
                     ddlStatus.SelectedIndex = 0;
@@ -172,7 +172,7 @@ namespace SEAMOrderStoreSystem
             string htmlContent = "<html><head><style>.detail-table, .detail-table th, .detail-table td{border: 1px solid;padding: 5px;text-align:right;            }.display-table td{                padding-right:10px;            border: 0px;                vertical-align:top;            }            body{            padding: 10%;            }</style></head><body><div style='width:100%;text-align:center;' > <h1> Millos Trading </h1>    123, Hill Street,<br/>    31000 Perak,<br />    Malaysia.<br />    <br />    Tel : 605-5342353 <br />    Fax : 605-5342352 <br />    </div>    <br />    <table class='display-table' >	<tr>		<td>Order ID</td>		<td>:</td>		<td>" +
                 order.id + "</td>	</tr>	<tr>		<td>Date</td>		<td>:</td>		<td>" +
                 order.date.ToShortDateString() + "</td>	</tr>	<tr>		<td>Salesperson</td>		<td>:</td>		<td>" +
-                order.staffName + "</td>	</tr>	<tr>		<td>Status</td>		<td>:</td>		<td>" +
+                order.salesmanName + "</td>	</tr>	<tr>		<td>Status</td>		<td>:</td>		<td>" +
                 order.status + "</td>	</tr>	<tr>		<td>Buyer</td>		<td>:</td>		<td>            " +
                 order.custName + "<br/>            " +
                 order.custEmail + "<br/>			<br/>            " +
