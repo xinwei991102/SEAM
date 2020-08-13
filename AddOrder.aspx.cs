@@ -30,8 +30,8 @@ namespace SEAMOrderStoreSystem
 
         private void BindDDLStaff()
         {
-            List<Staff> staffs = db.staffs.Where(x => x.role == "sales").ToList();
-            ddlStaff.DataSource = staffs;
+            List<Salesman> salesmen = db.salesmen;
+            ddlStaff.DataSource = salesmen;
             ddlStaff.DataTextField = "name";
             ddlStaff.DataValueField = "name";
             ddlStaff.DataBind();

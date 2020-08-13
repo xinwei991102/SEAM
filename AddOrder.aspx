@@ -1,149 +1,154 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddOrder.aspx.cs" Inherits="SEAMOrderStoreSystem.AddOrder" %>
+﻿<%@ Page Title="Add Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddOrder.aspx.cs" Inherits="SEAMOrderStoreSystem.AddOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div id="divPopup" runat="server" class="pop-container">
-
-        <div class="screen-cover">
+    <div id="divPopup" runat="server">
+        <div class="container p-5 mx-auto rounded border text-center"
+            style="z-index: 2100; background-color: white; opacity: 1; position: fixed; width: 400px; left: 50%; transform: translate(-50%, 0); top: 30%;">
+            <h4>Your order has been recorded.</h4>
+            <br />
+            <asp:Button ID="btnRefresh" CssClass="btn btn-primary" runat="server" UseSubmitBehavior="false" Text="View Your Order" OnClick="btnViewOrder2_Click" />
         </div>
-        <div class="popup">
-            <h2>Your order has been recorded.</h2><br />
-
-            
-            <asp:Button ID="btnViewOrder2" CssClass="btn btn-primary" runat="server" UseSubmitBehavior="false" Text="View Your Order" OnClick="btnViewOrder2_Click" />
-
-            
+        <div style="background-color: black; position: fixed; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.8; z-index: 2000;">
         </div>
     </div>
 
+    <div class="text-center">
+        <nav aria-label="breadcrumb" style="display: inline-block;">
+            <ol class="breadcrumb mb-0 py-0" style="background-color: transparent;">
+                <li class="breadcrumb-item"><a href="Default.aspx">Home</a></li>
+                <li class="breadcrumb-item"><a href="ViewAllOrders.aspx">Manage Orders</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create Order</li>
+            </ol>
+        </nav>
+        <hr />
+    </div>
 
-    <div class="modal-container row">
+    <h1 class="text-center">Create Order</h1>
+    <hr>
+    <div>
 
-        
-       
+        <h4>Order Info</h4>
+        <label><b>Order ID: </b></label>
+        <asp:TextBox ID="txtOrderID" runat="server" class="modalInput" type="text" required="true" ReadOnly="true" BorderStyle="None"></asp:TextBox>
 
-        <hr class="modal-hr">
+        <label><b>Date: </b></label>
+        <asp:TextBox ID="txtDate" runat="server" class="modalInput" type="text" required="true" ReadOnly="true" BorderStyle="None"></asp:TextBox>
 
-        <h1 class="whiteText">Add Order</h1>
-        <p class="whiteText">Please fill in this form to add an order.</p>
-        <hr class="modal-hr">
-
-        <h2 class="whiteText">Order Info</h2>
-        <label class="whiteText"><b>Order ID</b></label>
-        <asp:TextBox ID="txtOrderID" runat="server" class="modalInput" type="text"  required="true" ReadOnly></asp:TextBox>
-
-        <label class="whiteText"><b>Date</b></label>
-        <asp:TextBox ID="txtDate" runat="server" class="modalInput" type="text"  required="true" ReadOnly></asp:TextBox>
-
-
-        <label class="whiteText"><b>Sales Person</b></label>
+        <label><b>Salesman: </b></label>
         <asp:DropDownList ID="ddlStaff" runat="server"></asp:DropDownList>
 
-        <hr class="modal-hr">
+        <hr>
 
-        <h2 class="whiteText">Customer Info</h2>
+        <h4>Customer Info</h4>
 
-        <label class="whiteText"><b>Name</b></label>
+        <label><b>Name: </b></label>
         <asp:TextBox ID="txtCustName" runat="server" class="modalInput" type="text" placeholder="Enter name" required="true"></asp:TextBox>
 
-        <label class="whiteText"><b>Email</b></label>
+        <label><b>Email: </b></label>
         <asp:TextBox ID="txtCustEmail" runat="server" class="modalInput" type="text" placeholder="Enter email" required="true"></asp:TextBox>
 
-        <label class="whiteText"><b>Address</b></label>
+        <label><b>Address: </b></label>
         <asp:TextBox ID="txtCustAddress" runat="server" class="modalInput" type="text" placeholder="Enter address" required="true"></asp:TextBox>
 
-        <hr class="modal-hr">
+        <hr>
 
-        <h2 class="whiteText">Order Details</h2>
+        <h4>Order Items</h4>
 
-        <div class="row">
-            <asp:GridView ID="gvOrderQTY" CssClass="table product-table" runat="server" AutoGenerateColumns="false" Style="margin-bottom: 0px;">
+        <div>
+            <asp:GridView ID="gvOrderQTY" CssClass="table" runat="server" AutoGenerateColumns="False" Style="margin-bottom: 0px; width: 97%;" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <AlternatingRowStyle BackColor="White" />
                 <Columns>
-                    <asp:TemplateField HeaderText="No.">
+                    <asp:TemplateField HeaderText="No." HeaderStyle-Width="10%" ItemStyle-Width="10%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Product">
+                    <asp:TemplateField HeaderText="Product" HeaderStyle-Width="40%" ItemStyle-Width="40%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Quantity">
+                    <asp:TemplateField HeaderText="Quantity" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Unit Price">
+                    <asp:TemplateField HeaderText="Unit Price" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Discount">
+                    <asp:TemplateField HeaderText="Discount" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Total">
+                    <asp:TemplateField HeaderText="Subtotal" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
+                <EditRowStyle BackColor="#2461BF" />
+                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#EFF3FB" />
+                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
             <div style="width: 100%">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="product-table">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="product-table" style="table-layout: fixed">
                     <tr>
-                        <td>
-                            <asp:TextBox ID="txtNo" runat="server" Text="*" ReadOnly />
+                        <td style="width: 10%;">
+                            <asp:TextBox ID="txtNo" runat="server" Text="*" ReadOnly Style="height: 40px; width: 100%;" />
                         </td>
-                        <td>
-
-                            <asp:DropDownList ID="ddlProduct" runat="server" Style="height: 40px" onchange="return SelectProd();"></asp:DropDownList>
+                        <td style="width: 40%;">
+                            <asp:DropDownList ID="ddlProduct" runat="server" onchange="return SelectProd();" Style="height: 40px; width: 100%;"></asp:DropDownList>
                         </td>
-                        <td>
-                            <asp:TextBox ID="txtQTY" runat="server" Text="" type="number" onchange="return CalcTotal();" />
+                        <td style="width: 12.5%;">
+                            <asp:TextBox ID="txtQTY" runat="server" Text="" type="number" onchange="return CalcTotal();" Style="height: 40px; width: 100%;" />
                         </td>
-                        <td>
-                            <asp:TextBox ID="txtUnitPrice" runat="server" Text="" ReadOnly />
+                        <td style="width: 12.5%;">
+                            <asp:TextBox ID="txtUnitPrice" runat="server" Text="" ReadOnly Style="height: 40px; width: 100%;" />
                         </td>
-                        <td>
-                            <asp:TextBox ID="txtDiscount" runat="server" Text="" type="number" step="0.1" onchange="return CalcTotal();" />
+                        <td style="width: 12.5%;">
+                            <asp:TextBox ID="txtDiscount" runat="server" Text="" type="number" step="0.1" onchange="return CalcTotal();" Style="height: 40px; width: 100%;" />
                         </td>
-                        <td>
-                            <asp:TextBox ID="txtTotal" runat="server" Text="" ReadOnly />
+                        <td style="width: 12.5%;">
+                            <asp:TextBox ID="txtTotal" runat="server" Text="" ReadOnly Style="height: 40px; width: 100%;" />
                         </td>
-
+                        <td style="width: 3%;">
+                            <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" UseSubmitBehavior="false" Text="+" OnClientClick="return AddRow()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: right;">Total :
+                        </td>
+                        <td style="text-align: left;">
+                            <b>
+                                <asp:Label class="ml-2" ID="lblTotal" runat="server" Text="0.00"></asp:Label></b>
+                        </td>
                     </tr>
                 </table>
             </div>
-            <asp:Button ID="btnAdd" CssClass="btn btn-secondary" runat="server" UseSubmitBehavior="false" Text="Add" OnClientClick="return AddRow()" Style="float: right" />
-            <asp:Label ID="lblTotal" runat="server" style="float:right" Text="0.00"></asp:Label>
-            <asp:Label ID="label2" runat="server" style="float:right" Text="Total : "></asp:Label>
-            <br />
-
         </div>
 
-
-
-
-
-
-
-
-
-        <div class="row">
+        <div>
             <asp:Label ID="lblError" ForeColor="Red" runat="server"></asp:Label>
         </div>
 
 
-        <div class="clearfix">
-
-            <asp:Button ID="btnAddOrder" runat="server" Text="Add Order" class="signupbtn modal-button" OnClick="btnAddOrder_Click" />
-            <asp:Button ID="btnCancel" type="button" UseSubmitBehavior="false" runat="server" Text="Cancel" class="cancelbtn modal-button" OnClick="btnCancel_Click"/>
-
+        <div class="row mt-2">
+            <div class="col">
+                <asp:Button ID="btnAddOrder" runat="server" Text="Save This Order" style="width: 100%;" class="btn btn-primary" OnClick="btnAddOrder_Click" />
+            </div>
+            <div class="col">
+                <asp:Button ID="btnCancel" type="button" UseSubmitBehavior="false" runat="server" Text="Clear Fields" style="width: 100%;" class="btn btn-danger" OnClick="btnCancel_Click" />
+            </div>
+            <div class="col">
+                <asp:Button ID="btnViewOrder" runat="server" Text="Cancel Create Order" style="width: 100%;" class="btn btn-secondary" UseSubmitBehavior="false" OnClick="btnViewOrder_Click" />
+            </div>
         </div>
-        <asp:Button ID="btnViewOrder" runat="server" Text="View Order" class="redirectButton" UseSubmitBehavior="false" OnClick="btnViewOrder_Click"/>
-
-
-
 
     </div>
-
 
     <script type="text/javascript"> 
 
@@ -231,7 +236,7 @@
 
             SetValue(row, 5, "total", txtTotal);
 
-            
+
 
             row.cells[0].innerHTML = tbody.getElementsByTagName("tr").length;
             //Add the row to the GridView.

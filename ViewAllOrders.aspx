@@ -1,18 +1,28 @@
-﻿<%@ Page Title="Orders" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewAllOrders.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewAllOrders" %>
+﻿<%@ Page Title="Manage Orders" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewAllOrders.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewAllOrders" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="text-center">
+        <nav aria-label="breadcrumb" style="display: inline-block;">
+            <ol class="breadcrumb mb-0 py-0" style="background-color: transparent;">
+                <li class="breadcrumb-item"><a href="Default.aspx">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Orders</li>
+            </ol>
+        </nav>
+        <hr />
+    </div>
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Manage Orders</h1>
+                <h1 class="text-center">Manage Orders</h1>
                 <hr />
-                <h4>Filter by</h4>
+                <h4 class="mb-2">Filter by </h4>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-auto">
-                <label>Status </label><br />
+            <div class="col-lg-auto border-right">
+                <label style="font-weight: 500">Status </label>
+                <br />
                 <asp:CheckBox ID="chkPending" runat="server" Checked="true" />
                 <label>Pending</label>
                 <asp:CheckBox ID="chkConfirmed" runat="server" Checked="true" />
@@ -20,28 +30,31 @@
                 <asp:CheckBox ID="chkCanceled" runat="server" Checked="true" />
                 <label>Canceled</label>
             </div>
-            <div class="col-lg-auto">
-                <label>Date </label><br />
+            <div class="col-lg-auto border-right">
+                <label style="font-weight: 500">Date </label>
+                <br />
                 <asp:TextBox ID="txtDate" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter date (dd/mm/yyyy)"></asp:TextBox>
             </div>
-            <div class="col-lg-auto">
-                <label>Salesman </label><br />
+            <div class="col-lg-auto border-right">
+                <label style="font-weight: 500">Salesman </label>
+                <br />
                 <asp:TextBox ID="txtStaff" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter salesman name"></asp:TextBox>
             </div>
-            <div class="col-lg-auto">
-                <label>Customer </label><br />
+            <div class="col-lg-auto border-right">
+                <label style="font-weight: 500">Customer </label>
+                <br />
                 <asp:TextBox ID="txtCustName" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter customer name"></asp:TextBox>
             </div>
             <div class="col-lg">
                 <br />
-                <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" style="width:100%;"/>
+                <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" Style="width: 100%;" />
             </div>
         </div>
 
         <div class="row">
             <div class="col">
                 <hr>
-                <asp:GridView ID="gvOrder" CssClass="table table-bordered" EnableRowCache="true" OnSelectedIndexChanged="gvOrder_SelectedIndexChanged" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <asp:GridView ID="gvOrder" CssClass="table" EnableRowCache="true" OnSelectedIndexChanged="gvOrder_SelectedIndexChanged" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField HeaderText="ID">
@@ -92,10 +105,10 @@
 
         <div class="row">
             <div class="col">
-                    <asp:Button ID="btnAdd" type="button" UseSubmitBehavior="false" runat="server" OnClick="btnAdd_Click" Text="Create Order" class="btn btn-primary" style="width:100%;"/>
+                <asp:Button ID="btnAdd" type="button" UseSubmitBehavior="false" runat="server" OnClick="btnAdd_Click" Text="Create Order" class="btn btn-primary" Style="width: 100%;" />
             </div>
             <div class="col">
-                    <asp:Button ID="btnViewSalesReport" runat="server" Text="View Sales Report" UseSubmitBehavior="false" OnClick="btnViewSalesReport_Click" class="btn btn-secondary"  style="width:100%;"/>
+                <asp:Button ID="btnViewSalesReport" runat="server" Text="View Sales Report" UseSubmitBehavior="false" OnClick="btnViewSalesReport_Click" class="btn btn-secondary" Style="width: 100%;" />
             </div>
         </div>
     </div>

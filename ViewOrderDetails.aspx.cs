@@ -25,7 +25,7 @@ namespace SEAMOrderStoreSystem
                 List<OrderLine> orderLines = db.orderLines.Where(x => x.orderID == orderID).ToList();
 
                 txtOrderID.Text = "" + orderID;
-                txtDate.Text = order.date.ToString();
+                txtDate.Text = order.date.ToShortDateString();
                 txtStaff.Text = order.salesmanName;
                 if (order.status.Equals("pending"))
                 {
@@ -40,7 +40,6 @@ namespace SEAMOrderStoreSystem
                 {
                     ddlStatus.SelectedIndex = 2;
                     ddlStatus.Enabled = false;
-
 
                 }
 
@@ -128,21 +127,12 @@ namespace SEAMOrderStoreSystem
 
         }
 
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/AddOrder.aspx");
-
-        }
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
             Response.Redirect(Request.Url.AbsoluteUri);
         }
 
-        protected void btnViewOrder_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/ViewAllOrders.aspx");
-        }
 
         protected void btnCreatePDF_Click(object sender, EventArgs e)
         {
@@ -207,6 +197,9 @@ namespace SEAMOrderStoreSystem
 
         }
 
+        protected void btnCreateDO_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

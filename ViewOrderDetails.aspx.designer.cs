@@ -132,24 +132,6 @@ namespace SEAMOrderStoreSystem
         protected global::System.Web.UI.WebControls.Button btnEditOrder;
 
         /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
-
-        /// <summary>
-        /// btnViewOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnViewOrder;
-
-        /// <summary>
         /// btnCreatePDF control.
         /// </summary>
         /// <remarks>
@@ -157,5 +139,14 @@ namespace SEAMOrderStoreSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCreatePDF;
+
+        /// <summary>
+        /// btnCreateDO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCreateDO;
     }
 }

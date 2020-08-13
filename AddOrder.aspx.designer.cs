@@ -24,13 +24,13 @@ namespace SEAMOrderStoreSystem
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPopup;
 
         /// <summary>
-        /// btnViewOrder2 control.
+        /// btnRefresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnViewOrder2;
+        protected global::System.Web.UI.WebControls.Button btnRefresh;
 
         /// <summary>
         /// txtOrderID control.
@@ -166,15 +166,6 @@ namespace SEAMOrderStoreSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotal;
-
-        /// <summary>
-        /// label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label2;
 
         /// <summary>
         /// lblError control.

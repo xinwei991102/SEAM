@@ -1,37 +1,42 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewOrderDetails.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewOrderDetails" %>
+﻿<%@ Page Title="Order Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewOrderDetails.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewOrderDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="divPopup" runat="server" class="pop-container">
 
-        <div class="screen-cover">
-        </div>
-        <div class="popup">
-            <h2>Your order has been edited.</h2>
+    <div id="divPopup" runat="server">
+        <div class="container p-5 mx-auto rounded border text-center"
+            style="z-index: 2100; background-color: white; opacity: 1; position: fixed; width: 400px; left: 50%; transform: translate(-50%, 0); top: 30%;">
+            <h4>Your order has been edited.</h4>
             <br />
-
-
-            <asp:Button ID="btnRefresh" CssClass="btn btn-primary" runat="server" UseSubmitBehavior="false" Text="View Your Order" OnClick="btnRefresh_Click" />
-
-
+            <asp:Button ID="btnRefresh" CssClass="btn btn-primary" runat="server" UseSubmitBehavior="false" Text="View Updated Order" OnClick="btnRefresh_Click" />
+        </div>
+        <div style="background-color: black; position: fixed; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.8; z-index: 2000;">
         </div>
     </div>
+    <div class="text-center">
+        <nav aria-label="breadcrumb" style="display: inline-block;">
+            <ol class="breadcrumb mb-0 py-0" style="background-color: transparent;">
+                <li class="breadcrumb-item"><a href="Default.aspx">Home</a></li>
+                <li class="breadcrumb-item"><a href="ViewAllOrders.aspx">Manage Orders</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+            </ol>
+        </nav>
+        <hr />
+    </div>
 
-    <h1 class="whiteText">View Order</h1>
-    <p class="whiteText">Order details of your order.</p>
-    <hr class="modal-hr">
+    <h1 class="text-center">View Order Details</h1>
+    <hr>
 
-    <h2 class="whiteText">Order Info</h2>
-    <label class="whiteText"><b>Order ID</b></label>
-    <asp:TextBox ID="txtOrderID" runat="server" class="modalInput" type="text" required="true" ReadOnly></asp:TextBox>
+    <h4>Order Info</h4>
+    <label><b>Order ID: </b></label>
+    <asp:TextBox ID="txtOrderID" runat="server" class="modalInput" type="text" required="true" ReadOnly="true" BorderStyle="None"></asp:TextBox>
 
-    <label class="whiteText"><b>Date</b></label>
-    <asp:TextBox ID="txtDate" runat="server" class="modalInput" type="text" required="true" ReadOnly></asp:TextBox>
+    <label><b>Date: </b></label>
+    <asp:TextBox ID="txtDate" runat="server" class="modalInput" type="text" required="true" ReadOnly="true" BorderStyle="None"></asp:TextBox>
 
+    <label><b>Salesman: </b></label>
+    <asp:TextBox ID="txtStaff" runat="server" class="modalInput" type="text" required="true" ReadOnly="true" BorderStyle="None"></asp:TextBox>
 
-    <label class="whiteText"><b>Staff</b></label>
-    <asp:TextBox ID="txtStaff" runat="server" class="modalInput" type="text" required="true" ReadOnly></asp:TextBox>
-
-    <label class="whiteText"><b>Status</b></label>
+    <label><b>Status</b></label>
     <asp:DropDownList ID="ddlStatus" runat="server">
         <asp:ListItem Text="Pending"></asp:ListItem>
         <asp:ListItem Text="Confirmed"></asp:ListItem>
@@ -41,23 +46,24 @@
     <hr class="modal-hr">
 
 
-    <h2 class="whiteText">Customer Info</h2>
+    <h4>Customer Info</h4>
 
-    <label class="whiteText"><b>Name</b></label>
+    <label><b>Name: </b></label>
     <asp:TextBox ID="txtCustName" runat="server" class="modalInput" type="text" placeholder="Enter name" required="true"></asp:TextBox>
 
-    <label class="whiteText"><b>Email</b></label>
+    <label class="ml-3"><b>Email: </b></label>
     <asp:TextBox ID="txtCustEmail" runat="server" class="modalInput" type="text" placeholder="Enter email" required="true"></asp:TextBox>
 
-    <label class="whiteText"><b>Address</b></label>
+    <label class="ml-3"><b>Address: </b></label>
     <asp:TextBox ID="txtCustAddress" runat="server" class="modalInput" type="text" placeholder="Enter address" required="true"></asp:TextBox>
 
     <hr>
 
-    <h2 class="whiteText">Order Details</h2>
+    <h4>Order Items</h4>
 
 
-    <asp:GridView ID="gvOrderQTY" CssClass="table product-table" EnableRowCache="true" runat="server" AutoGenerateColumns="false" Style="margin-bottom: 0px;">
+    <asp:GridView ID="gvOrderQTY" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" Style="margin-bottom: 0px;" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:TemplateField HeaderText="No.">
                 <ItemTemplate>
@@ -73,7 +79,7 @@
             <asp:TemplateField HeaderText="Quantity">
 
                 <ItemTemplate>
-                    <asp:TextBox ID="txtEditQTY" runat="server" Text='<%# Eval("qty") %>' type="number" step="1" required onchange="return CalcTotal();" />
+                    <asp:TextBox ID="txtEditQTY" runat="server" Text='<%# Eval("qty") %>' type="number" step="1" required="true" onchange="return CalcTotal();" />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Unit Price">
@@ -88,10 +94,10 @@
             <asp:TemplateField HeaderText="Discount">
 
                 <ItemTemplate>
-                    <asp:TextBox ID="txtEditDiscount" runat="server" Text='<%# Eval("discount") %>' type="number" step="0.1" required onchange="return CalcTotal();" />
+                    <asp:TextBox ID="txtEditDiscount" runat="server" Text='<%# Eval("discount") %>' type="number" step="0.1" required="true" onchange="return CalcTotal();" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Total">
+            <asp:TemplateField HeaderText="Subtotal">
                 <ItemTemplate>
                     <asp:Label Text='<%# decimal.Parse(Eval("total").ToString()).ToString("0.00") %>' runat="server"></asp:Label>
 
@@ -99,45 +105,57 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+        <EditRowStyle BackColor="#2461BF" />
+        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#EFF3FB" />
+        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#F5F7FB" />
+        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+        <SortedDescendingCellStyle BackColor="#E9EBEF" />
+        <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
-
-    <asp:Label ID="lblTotal" runat="server" Style="float: right"></asp:Label>
-
-    <asp:Label ID="lblError" ForeColor="Red" runat="server"></asp:Label>
-
-    <div class="clearfix">
-
-        <asp:Button ID="btnEditOrder" runat="server" Text="Edit Order" class="signupbtn modal-button" OnClick="btnEditOrder_Click" />
-        <asp:Button ID="btnCancel" type="button" UseSubmitBehavior="false" runat="server" Text="Cancel" class="cancelbtn modal-button" OnClick="btnCancel_Click" />
-
+    <div class="row">
+        <div class="col">
+            <asp:Label ID="lblTotal" runat="server" Style="float: right"></asp:Label>
+            <asp:Label ID="lblError" ForeColor="Red" runat="server"></asp:Label>
+        </div>
     </div>
-    <asp:Button ID="btnViewOrder" runat="server" Text="View Order" class="redirectButton" UseSubmitBehavior="false" OnClick="btnViewOrder_Click" />
-    <asp:Button ID="btnCreatePDF" runat="server" Text="Generate PDF" class="redirectButton" UseSubmitBehavior="false" OnClick="btnCreatePDF_Click" />
-
-
+    <div class="row mt-2">
+        <div class="col">
+            <asp:Button ID="btnEditOrder" runat="server" style="width: 100%;" class="btn btn-primary" Text="Save Changes" OnClick="btnEditOrder_Click" />
+        </div>
+        <div class="col">
+            <asp:Button ID="btnCreatePDF" runat="server" style="width: 100%;" class="btn btn-secondary" Text="Generate Invoice" UseSubmitBehavior="false" OnClick="btnCreatePDF_Click" />
+        </div>
+        <div class="col">
+            <asp:Button ID="btnCreateDO" runat="server" style="width: 100%;" class="btn btn-secondary" Text="Generate Delivery Order" UseSubmitBehavior="false" OnClick="btnCreateDO_Click" />
+        </div>
+    </div>
 
     <script type="text/javascript">
         function CalcTotal() {
             var gridView = document.getElementById("<%=gvOrderQTY.ClientID %>");
 
-                //Reference the TBODY tag.
-                var tbody = gridView.getElementsByTagName("tbody")[0];
+            //Reference the TBODY tag.
+            var tbody = gridView.getElementsByTagName("tbody")[0];
 
-                //Reference the first row.
-                var i;
-                var ttotal = 0;
-                for (i = 1; i < tbody.rows.length; i++) {
-                    var row = tbody.getElementsByTagName("tr")[i];
-                    var qty = row.cells[2].getElementsByTagName("input")[0].value;
-                    var price = row.cells[3].getElementsByTagName("span")[0].innerHTML;
-                    var discount = row.cells[4].getElementsByTagName("input")[0].value;
-                    var total = qty * price * (1 - discount);
+            //Reference the first row.
+            var i;
+            var ttotal = 0;
+            for (i = 1; i < tbody.rows.length; i++) {
+                var row = tbody.getElementsByTagName("tr")[i];
+                var qty = row.cells[2].getElementsByTagName("input")[0].value;
+                var price = row.cells[3].getElementsByTagName("span")[0].innerHTML;
+                var discount = row.cells[4].getElementsByTagName("input")[0].value;
+                var total = qty * price * (1 - discount);
 
-                    ttotal += total;
-                    row.cells[5].getElementsByTagName("span")[0].innerHTML = (Math.round(total * 100) / 100).toFixed(2);
-                }
+                ttotal += total;
+                row.cells[5].getElementsByTagName("span")[0].innerHTML = (Math.round(total * 100) / 100).toFixed(2);
+            }
 
-                document.getElementById("<%=lblTotal.ClientID%>").innerHTML = "Total : " + (Math.round(ttotal * 100) / 100).toFixed(2);
+            document.getElementById("<%=lblTotal.ClientID%>").innerHTML = "Total : " + (Math.round(ttotal * 100) / 100).toFixed(2);
 
 
         }
