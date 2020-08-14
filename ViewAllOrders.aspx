@@ -16,34 +16,38 @@
     <div class="container">
         <h4 class="mb-2">Search by </h4>
         <div class="row">
-            <div class="col-lg-auto border-right">
+            <div class="col-lg border-right">
                 <label style="font-weight: 500">Status </label>
                 <br />
                 <asp:CheckBox ID="chkPending" runat="server" Checked="true" />
-                <label>Pending</label>
+                <label class="mr-2">Pending</label>
                 <asp:CheckBox ID="chkConfirmed" runat="server" Checked="true" />
-                <label>Confirmed</label>
+                <label class="mr-2">Confirmed</label>
                 <asp:CheckBox ID="chkCanceled" runat="server" Checked="true" />
                 <label>Canceled</label>
             </div>
-            <div class="col-lg-auto border-right">
+            <div class="col-lg border-right">
                 <label style="font-weight: 500">Date </label>
                 <br />
                 <asp:TextBox ID="txtDate" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter date (dd/mm/yyyy)"></asp:TextBox>
             </div>
-            <div class="col-lg-auto border-right">
+            <div class="col-lg border-right">
                 <label style="font-weight: 500">Salesman </label>
                 <br />
                 <asp:TextBox ID="txtStaff" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter salesman name"></asp:TextBox>
             </div>
-            <div class="col-lg-auto border-right">
+            <div class="col-lg border-right">
                 <label style="font-weight: 500">Customer </label>
                 <br />
                 <asp:TextBox ID="txtCustName" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter customer name"></asp:TextBox>
             </div>
-            <div class="col-lg">
+            <div class="col-lg-1 pr-0">
                 <br />
                 <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" Style="width: 100%;" />
+            </div>
+            <div class="col-lg-1 pl-1">
+                <br />
+                <a href="ViewAllOrders.aspx" class="btn btn-secondary" style="width:100%;">Reset</a>
             </div>
         </div>
 

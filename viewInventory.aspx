@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Inventory" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewInventory.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewInventory" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        <div class="text-center">
+    <div class="text-center">
         <nav aria-label="breadcrumb" style="display: inline-block;">
             <ol class="breadcrumb mb-0 py-0" style="background-color: transparent;">
                 <li class="breadcrumb-item"><a href="Default.aspx">Home</a></li>
@@ -24,13 +25,23 @@
                 <label>Discontinued</label>
             </div>
             <div class="col-lg border-right">
+                <label style="font-weight: 500">Location </label>
+                <br />
+                <asp:TextBox ID="txtLocation" CssClass="form-control" Style="width: 100%;" runat="server" class="modalInput" type="text" placeholder="Enter location"></asp:TextBox>
+            </div>
+            <div class="col-lg border-right">
                 <label style="font-weight: 500">Keyword </label>
                 <br />
-                <asp:TextBox ID="txtSearch" CssClass="form-control" Style="width:100%;" runat="server" class="modalInput" type="text" placeholder="Enter keyword"></asp:TextBox>
+                <asp:TextBox ID="txtSearch" CssClass="form-control" Style="width: 100%;" runat="server" class="modalInput" type="text" placeholder="Enter keyword"></asp:TextBox>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1 pr-0">
                 <br />
                 <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" Style="width: 100%;" />
+
+            </div>
+            <div class="col-lg-1 pl-1">
+                <br />
+                <a href="ViewInventory.aspx" class="btn btn-secondary" style="width:100%;">Reset</a>
             </div>
         </div>
 
@@ -40,6 +51,11 @@
                 <asp:GridView ID="gvProducts" CssClass="table" Font-Size="Small" EnableRowCache="true" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
+                        <asp:TemplateField HeaderText="ID">
+                            <ItemTemplate>
+                                <asp:Label Text='<%# Eval("id") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Name">
                             <ItemTemplate>
                                 <asp:Label Text='<%# Eval("name") %>' runat="server"></asp:Label>

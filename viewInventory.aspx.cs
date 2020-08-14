@@ -42,14 +42,31 @@ namespace SEAMOrderStoreSystem
 
         protected void gvProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string prodname = ((Label)gvProducts.SelectedRow.Cells[0].Controls[1]).Text;
-            Response.Redirect("~/ViewProductDetails.aspx?ProductName=" + prodname);
+            string id = ((Label)gvProducts.SelectedRow.Cells[0].Controls[1]).Text;
+            Response.Redirect("~/ViewProductDetails.aspx?ProductId=" + id);
         }
 
         protected void updateTable()
         {
             List<Product> products = new List<Product>();
+            
+            if (chkAvailable.Checked)
+            {
+                products.AddRange(db.products.Where(x => x.status == "available").ToList());
+            }
+            if (chkDiscontinued.Checked)
+            {
+                products.AddRange(db.products.Where(x => x.status == "discontinued").ToList());
+            }
 
+            products = products.Where(x => x.location.Contains(txtLocation.Text) 
+            && (x.id.ToString().Contains(txtSearch.Text) 
+            || x.comment.Contains(txtSearch.Text) 
+            || x.description.Contains(txtSearch.Text) 
+            ||  x.manufacturer.Contains(txtSearch.Text)
+            || x.name.Contains(txtSearch.Text) 
+            || x.supplier.Contains(txtSearch.Text)
+            || x.category.Contains(txtSearch.Text))).OrderBy(x => x.id).ToList();
             //if (chkPending.Checked)
             //{
             //    orders.AddRange(db.orders.Where(x => x.status == "pending").ToList());
@@ -66,19 +83,7 @@ namespace SEAMOrderStoreSystem
             //orders = orders.Where(x => x.date.ToShortDateString().Contains(txtDate.Text) && x.salesmanName.Contains(txtStaff.Text) && x.custName.Contains(txtCustName.Text)).OrderBy(x => x.id).ToList();
 
 
-            //List<OrderTotal> orderTotals = new List<OrderTotal>();
-            //foreach (Order order in orders)
-            //{
-            //    decimal total = 0;
-            //    foreach (OrderLine orderLine in db.orderLines.Where(x => x.orderID == order.id))
-            //    {
-            //        Product product = db.products.Single(x => x.id == orderLine.productID);
-            //        total += orderLine.quantity * product.price * (1 - orderLine.discount);
-            //    }
-            //    OrderTotal orderTotal = new OrderTotal(order, total);
-            //    orderTotals.Add(orderTotal);
-            //}
-            gvProducts.DataSource = db.products;
+            gvProducts.DataSource = products;
             gvProducts.DataBind();
         }
 
