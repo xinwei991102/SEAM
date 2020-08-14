@@ -132,6 +132,24 @@ namespace SEAMOrderStoreSystem
         protected global::System.Web.UI.WebControls.TextBox txtStatus;
 
         /// <summary>
+        /// txtStockIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStockIn;
+
+        /// <summary>
+        /// btnStockIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnStockIn;
+
+        /// <summary>
         /// gvTransactions control.
         /// </summary>
         /// <remarks>

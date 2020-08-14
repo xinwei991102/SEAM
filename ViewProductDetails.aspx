@@ -15,17 +15,23 @@
     <hr>
     <asp:TextBox runat="server" ID="txtProdID" ReadOnly="true"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtProdName"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
+    <asp:TextBox runat="server" ID="txtPrice" TextMode="Number"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtCategory"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtManufacturer"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtSupplier"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtDesc"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtComment"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtLocation"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtStock"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtReorderLv"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtTargetStock"></asp:TextBox>
+    <asp:TextBox runat="server" ID="txtStock" TextMode="Number"></asp:TextBox>
+    <asp:TextBox runat="server" ID="txtReorderLv" TextMode="Number"></asp:TextBox>
+    <asp:TextBox runat="server" ID="txtTargetStock" TextMode="Number"></asp:TextBox>
     <asp:TextBox runat="server" ID="txtStatus"></asp:TextBox>
+
+    <h4>Stock In</h4>
+    <label>Stock In Amount:</label>
+    <asp:TextBox runat="server" ID="txtStockIn" TextMode="Number"></asp:TextBox>
+    <asp:Button runat="server" ID="btnStockIn" Text="Confirm" OnClick="btnStockIn_Click"/>
+
     <asp:GridView ID="gvTransactions" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gvTransactions_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" />
         <Columns>

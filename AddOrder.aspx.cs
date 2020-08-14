@@ -53,9 +53,6 @@ namespace SEAMOrderStoreSystem
         {
             DataTable dt = new DataTable();
 
-
-
-
             dt.Rows.Add();
 
 
@@ -117,10 +114,7 @@ namespace SEAMOrderStoreSystem
                     db.updateOrders();
                     db.updateOrderLines();
 
-                    
-
                     popUp();
-
 
                 }
                 else
