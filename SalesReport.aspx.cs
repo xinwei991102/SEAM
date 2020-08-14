@@ -25,6 +25,29 @@ namespace SEAMOrderStoreSystem
 
         }
 
+        private class SalesmanSales
+        {
+            public string name { get; set; }
+            public decimal total { get; set; }
+            public SalesmanSales(string name)
+            {
+                this.name = name;
+                total = 0;
+            }
+        }
+
+        private class OrderTotal
+        {
+            public int orderId { get; set; }
+            public decimal total { get; set; }
+            public string salesmanName { get; set; }
+            public OrderTotal(int orderId, string salesmanName)
+            {
+                this.orderId = orderId;
+                this.salesmanName = salesmanName;
+                total = 0;
+            }
+        }
 
         DatabaseContext db = DatabaseContext.getContext();
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +55,7 @@ namespace SEAMOrderStoreSystem
             if (!IsPostBack)
             {
                 DateTime dtime = DateTime.Now;
-                ddlMonth.SelectedIndex = dtime.Month - 2;
+                ddlMonth.SelectedIndex = dtime.Month - 1;
 
                 txtYear.Text = dtime.Year.ToString();
 
@@ -43,22 +66,23 @@ namespace SEAMOrderStoreSystem
 
         private void bindChart()
         {
-
+            // get month and year
             string month = ddlMonth.SelectedValue;
             string year = txtYear.Text;
 
-            List<Order> orders = db.orders.Where(x => x.date.ToShortDateString().Contains(month + year)).ToList();
+            //get orders within the month specified
+            List<Order> orders = db.orders.Where(x => x.date.ToShortDateString().Contains(month + year) && x.status.Equals("confirmed")).ToList();
             List<OrderLine> orderLines = new List<OrderLine>();
-            foreach(Order ord in orders)
+
+            //get all orderlines of the orders in the month
+            foreach (Order ord in orders)
             {
                 orderLines.AddRange(db.orderLines.Where(x => x.orderID == ord.id));
-
             }
 
-            
-          
-            List<ProdSales> prodSales = new List<ProdSales>();
+            List<OrderTotal> orderTotals = new List<OrderTotal>();
 
+            List<ProdSales> prodSales = new List<ProdSales>();
             foreach (var prodOrder in orderLines)
             {
                 Product prod = db.products.Single(x => x.id == prodOrder.productID);
@@ -66,11 +90,38 @@ namespace SEAMOrderStoreSystem
                 {
                     prodSales.Add(new ProdSales(prod.name));
                 }
+                //prodSales.Single(x => x.name == prod.name).total += (prodOrder.quantity * prod.price * (1 - prodOrder.discount));
+                prodSales.Single(x => x.name == prod.name).total += prodOrder.quantity;
 
-                prodSales.Single(x => x.name == prod.name).total += (prodOrder.quantity * prod.price * (1 - prodOrder.discount));
+                Order order = db.orders.Single(x => x.id == prodOrder.orderID);
+                if (orderTotals.Count(x=>x.orderId == order.id) == 0)
+                {
+                    orderTotals.Add(new OrderTotal(order.id, order.salesmanName));
+                }
+                orderTotals.Single(x => x.orderId == order.id).total += (prodOrder.quantity * prod.price * (1 - prodOrder.discount));
+            }
+
+            List<SalesmanSales> salesmanSales = new List<SalesmanSales>();
+            foreach (Salesman salesman in db.salesmen)
+            {
+                SalesmanSales x = new SalesmanSales(salesman.name);
+                foreach (OrderTotal orderTotal in orderTotals)
+                {
+                    if (salesman.name.Equals(orderTotal.salesmanName)){
+                        x.total += orderTotal.total;
+                    }
+                }
+                if (x.total > 0)
+                {
+                    salesmanSales.Add(x);
+                }
+                
             }
             string[] prodNames = new string[prodSales.Count];
             decimal[] prodTotals = new decimal[prodSales.Count];
+
+            string[] salesmanNames = new string[salesmanSales.Count];
+            decimal[] salesmanTotals = new decimal[salesmanSales.Count];
 
             for (int i = 0; i < prodSales.Count; i++)
             {
@@ -78,24 +129,20 @@ namespace SEAMOrderStoreSystem
                 prodTotals[i] = prodSales.ElementAt(i).total;
             }
 
+            for (int i = 0; i < salesmanSales.Count; i++)
+            {
+                salesmanNames[i] = salesmanSales.ElementAt(i).name;
+                salesmanTotals[i] = salesmanSales.ElementAt(i).total;
+            }
+
             //binding chart control  
             chtProdSales.Series[0].Points.DataBindXY(prodNames, prodTotals);
-
-            //Setting width of line  
-            chtProdSales.Series[0].BorderWidth = 10;
-            //setting Chart type   
-            chtProdSales.Series[0].ChartType = SeriesChartType.Bar;
-            // Chart1.Series[0].ChartType = SeriesChartType.StackedBar;  
-
-            //Hide or show chart back GridLines  
-            //Chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;  
-            //Chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;  
-
-            //Enabled 3D  
-            //Chart1.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;\
-
             gvProdSales.DataSource = prodSales;
             gvProdSales.DataBind();
+
+            chtSalesman.Series[0].Points.DataBindXY(salesmanNames, salesmanTotals);
+            gvSalesman.DataSource = salesmanSales;
+            gvSalesman.DataBind();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -103,9 +150,5 @@ namespace SEAMOrderStoreSystem
             bindChart();
         }
 
-        protected void btnViewOrder_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/ViewAllOrders.aspx");
-        }
     }
 }

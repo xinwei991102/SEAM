@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddOrder.aspx.cs" Inherits="SEAMOrderStoreSystem.AddOrder" %>
+﻿<%@ Page Title="Create Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddOrder.aspx.cs" Inherits="SEAMOrderStoreSystem.AddOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divPopup" runat="server">
@@ -70,7 +70,7 @@
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Unit Price" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
+                    <asp:TemplateField HeaderText="Unit Price (RM)" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -78,7 +78,7 @@
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Subtotal" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
+                    <asp:TemplateField HeaderText="Subtotal (RM)" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -120,7 +120,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" style="text-align: right;">Total :
+                        <td colspan="5" style="text-align: right;">Total (RM) :
                         </td>
                         <td style="text-align: left;">
                             <b>

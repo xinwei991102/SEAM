@@ -36,7 +36,7 @@
     <label><b>Salesman: </b></label>
     <asp:TextBox ID="txtStaff" runat="server" class="modalInput" type="text" required="true" ReadOnly="true" BorderStyle="None"></asp:TextBox>
 
-    <label><b>Status</b></label>
+    <label><b>Status: </b></label>
     <asp:DropDownList ID="ddlStatus" runat="server">
         <asp:ListItem Text="Pending"></asp:ListItem>
         <asp:ListItem Text="Confirmed"></asp:ListItem>
@@ -65,43 +65,34 @@
     <asp:GridView ID="gvOrderQTY" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" Style="margin-bottom: 0px;" CellPadding="4" ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:TemplateField HeaderText="No.">
+            <asp:TemplateField HeaderText="No." HeaderStyle-Width="5%" ItemStyle-Width="5%">
                 <ItemTemplate>
                     <asp:Label Text='<%# Eval("num") %>' runat="server"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Product">
+            <asp:TemplateField HeaderText="Product" HeaderStyle-Width="40%" ItemStyle-Width="40%">
                 <ItemTemplate>
                     <asp:Label Text='<%# Eval("prod") %>' runat="server"></asp:Label>
-
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Quantity">
-
+            <asp:TemplateField HeaderText="Quantity" HeaderStyle-Width="15%" ItemStyle-Width="15%">
                 <ItemTemplate>
                     <asp:TextBox ID="txtEditQTY" runat="server" Text='<%# Eval("qty") %>' type="number" step="1" required="true" onchange="return CalcTotal();" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Unit Price">
+            <asp:TemplateField HeaderText="Unit Price (RM)" HeaderStyle-Width="15%" ItemStyle-Width="15%">
                 <ItemTemplate>
                     <asp:Label Text='<%# decimal.Parse(Eval("price").ToString()).ToString("0.00") %>' runat="server"></asp:Label>
-
-
-
                 </ItemTemplate>
-
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Discount">
-
+            <asp:TemplateField HeaderText="Discount" HeaderStyle-Width="10%" ItemStyle-Width="10%">
                 <ItemTemplate>
                     <asp:TextBox ID="txtEditDiscount" runat="server" Text='<%# Eval("discount") %>' type="number" step="0.1" required="true" onchange="return CalcTotal();" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Subtotal">
+            <asp:TemplateField HeaderText="Subtotal (RM)" HeaderStyle-Width="15%" ItemStyle-Width="15%">
                 <ItemTemplate>
                     <asp:Label Text='<%# decimal.Parse(Eval("total").ToString()).ToString("0.00") %>' runat="server"></asp:Label>
-
-
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -116,21 +107,23 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
-    <div class="row">
-        <div class="col">
-            <asp:Label ID="lblTotal" runat="server" Style="float: right"></asp:Label>
-            <asp:Label ID="lblError" ForeColor="Red" runat="server"></asp:Label>
-        </div>
-    </div>
+    <table style="width:100%;">
+        <tr>
+            <td colspan="5" style="text-align: right; width: 85%;">Total (RM) : </td>
+            <td style="text-align:left; width: 15%;"><b><asp:Label ID="lblTotal" runat="server"></asp:Label></b></td>
+        </tr>
+    </table>
+    <asp:Label ID="lblError" ForeColor="Red" runat="server"></asp:Label>
+
     <div class="row mt-2">
         <div class="col">
-            <asp:Button ID="btnEditOrder" runat="server" style="width: 100%;" class="btn btn-primary" Text="Save Changes" OnClick="btnEditOrder_Click" />
+            <asp:Button ID="btnEditOrder" runat="server" Style="width: 100%;" class="btn btn-primary" Text="Save Changes" OnClick="btnEditOrder_Click" />
         </div>
         <div class="col">
-            <asp:Button ID="btnCreatePDF" runat="server" style="width: 100%;" class="btn btn-secondary" Text="Generate Invoice" UseSubmitBehavior="false" OnClick="btnCreatePDF_Click" />
+            <asp:Button ID="btnCreatePDF" runat="server" Style="width: 100%;" class="btn btn-secondary" Text="Generate Invoice" UseSubmitBehavior="false" OnClick="btnCreatePDF_Click" />
         </div>
         <div class="col">
-            <asp:Button ID="btnCreateDO" runat="server" style="width: 100%;" class="btn btn-secondary" Text="Generate Delivery Order" UseSubmitBehavior="false" OnClick="btnCreateDO_Click" />
+            <asp:Button ID="btnCreateDO" runat="server" Style="width: 100%;" class="btn btn-secondary" Text="Generate Delivery Order" UseSubmitBehavior="false" OnClick="btnCreateDO_Click" />
         </div>
     </div>
 
@@ -159,5 +152,5 @@
 
 
         }
-        </script>
+    </script>
 </asp:Content>

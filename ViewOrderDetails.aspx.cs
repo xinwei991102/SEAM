@@ -66,7 +66,7 @@ namespace SEAMOrderStoreSystem
                 gvOrderQTY.DataSource = orderProds;
                 gvOrderQTY.DataBind();
 
-                lblTotal.Text = "Total : " + ttotal.ToString("0.00");
+                lblTotal.Text = ttotal.ToString("0.00");
             }
 
             divPopup.Visible = false;

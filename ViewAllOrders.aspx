@@ -10,15 +10,11 @@
         </nav>
         <hr />
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-center">Manage Orders</h1>
-                <hr />
-                <h4 class="mb-2">Filter by </h4>
-            </div>
-        </div>
+    <h1 class="text-center">Manage Orders</h1>
+    <hr />
 
+    <div class="container">
+        <h4 class="mb-2">Search by </h4>
         <div class="row">
             <div class="col-lg-auto border-right">
                 <label style="font-weight: 500">Status </label>
@@ -72,7 +68,7 @@
                                 <asp:Label Text='<%# Eval("order.custName") %>' runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Amount">
+                        <asp:TemplateField HeaderText="Total (RM)">
                             <ItemTemplate>
                                 <asp:Label Text='<%# decimal.Parse(Eval("total").ToString()).ToString("0.00") %>' runat="server"></asp:Label>
                             </ItemTemplate>
