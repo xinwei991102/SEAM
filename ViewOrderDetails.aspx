@@ -120,6 +120,9 @@
             <asp:Button ID="btnEditOrder" runat="server" Style="width: 100%;" class="btn btn-primary" Text="Save Changes" OnClick="btnEditOrder_Click" />
         </div>
         <div class="col">
+            <asp:HyperLink runat="server" ID="linkRefresh" CssClass="btn btn-secondary" style="width:100%;" >Reset</asp:HyperLink>
+        </div>
+        <div class="col">
             <asp:Button ID="btnCreatePDF" runat="server" Style="width: 100%;" class="btn btn-secondary" Text="Generate Invoice" UseSubmitBehavior="false" OnClick="btnCreatePDF_Click" />
         </div>
         <div class="col">

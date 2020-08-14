@@ -37,7 +37,6 @@
             <div class="col-lg-1 pr-0">
                 <br />
                 <asp:Button ID="btnSearch" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="btnSearch_Click" Style="width: 100%;" />
-
             </div>
             <div class="col-lg-1 pl-1">
                 <br />

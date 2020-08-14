@@ -7,7 +7,7 @@ namespace SEAMOrderStoreSystem.Entities
 {
     public class Product
     {
-        public int id { get; }
+        public int id { get; set; }
         public string name { get; set;}
         public decimal price { get; set; }
         public string category { get; set; }
@@ -39,5 +39,8 @@ namespace SEAMOrderStoreSystem.Entities
             
         }
 
+        public Product()
+        {
+        }
     }
 }

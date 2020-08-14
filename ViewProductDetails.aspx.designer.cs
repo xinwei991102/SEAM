@@ -24,6 +24,15 @@ namespace SEAMOrderStoreSystem
         protected global::System.Web.UI.WebControls.TextBox txtProdID;
 
         /// <summary>
+        /// ddlStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+
+        /// <summary>
         /// txtProdName control.
         /// </summary>
         /// <remarks>
@@ -123,13 +132,22 @@ namespace SEAMOrderStoreSystem
         protected global::System.Web.UI.WebControls.TextBox txtTargetStock;
 
         /// <summary>
-        /// txtStatus control.
+        /// btnEditProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStatus;
+        protected global::System.Web.UI.WebControls.Button btnEditProduct;
+
+        /// <summary>
+        /// linkRefresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkRefresh;
 
         /// <summary>
         /// txtStockIn control.

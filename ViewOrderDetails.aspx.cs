@@ -21,6 +21,7 @@ namespace SEAMOrderStoreSystem
             if (!IsPostBack)
             {
                 orderID = int.Parse(Request.QueryString["OrderID"]);
+                linkRefresh.NavigateUrl = "ViewOrderDetails.aspx?OrderID=" + orderID;
                 Order order = db.orders.Single(x => x.id == orderID);
                 List<OrderLine> orderLines = db.orderLines.Where(x => x.orderID == orderID).ToList();
 
