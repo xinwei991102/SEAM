@@ -364,6 +364,7 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Salesman.cs" />
     <Compile Include="Entities\Staff.cs" />
+    <Compile Include="Entities\StockTransaction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using SEAMOrderStoreSystem.DataAcesss;
+using SEAMOrderStoreSystem.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace SEAMOrderStoreSystem
             if (!IsPostBack)
             {
                 string productId = Request.QueryString["ProductId"];
+                Product prod = db.products.Single(x => x.id.ToString() == productId);
+                txtProdID.Text = prod.id.ToString();
+                txtProdName.Text = prod.name;
+                txtPrice.Text = prod.price.ToString("")
+
             }
         }
     }

@@ -116,7 +116,7 @@
                                 <asp:Label Text='<%# Eval("status") %>' runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:CommandField SelectText="View Order" ShowSelectButton="True" ButtonType="Button" />
+                        <asp:CommandField SelectText="Edit Product" ShowSelectButton="True" ButtonType="Button" />
                     </Columns>
                     <EditRowStyle BackColor="#2461BF" />
                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

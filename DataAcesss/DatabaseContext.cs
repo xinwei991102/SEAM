@@ -21,6 +21,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
         public List<Order> orders = new List<Order>();
         public List<OrderLine> orderLines = new List<OrderLine>();
         public List<Salesman> salesmen = new List<Salesman>();
+        public List<StockTransaction> stockTransactions = new List<StockTransaction>();
 
         private DatabaseContext()
         {
@@ -31,6 +32,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
             loadOrders();
             loadOrderLines();
             loadSalesmen();
+            loadStockTransaction();
         }
 
 
@@ -129,6 +131,22 @@ namespace SEAMOrderStoreSystem.DataAcesss
             }
         }
 
+
+        private void loadStockTransaction()
+        {
+            var rs = session.Execute("select * from StockTransaction");
+            foreach (var row in rs)
+            {
+                int id = row.GetValue<int>("id");
+                int productId = row.GetValue<int>("product_id");
+                DateTime stockInDate = row.GetValue<DateTime>("stock_in_date");
+                int stockInAmount = row.GetValue<int>("stock_in_amount");
+                int amounAfterRestock = row.GetValue<int>("amount_after_restock");
+                StockTransaction stockTransaction = new StockTransaction(id, productId, stockInDate, stockInAmount, amounAfterRestock);
+                stockTransactions.Add(stockTransaction);
+            }
+        }
+
         public void updateProducts()
         {
          
@@ -174,7 +192,16 @@ namespace SEAMOrderStoreSystem.DataAcesss
             }
         }
 
-      
+        public void updateStockTransactions()
+        {
+            var ps = session.Prepare("insert into StockTransaction (id, product_id, stock_in_date, stock_in_amount, amount_after_restock) values (?,?,?,?,?)");
+
+            foreach (var st in stockTransactions)
+            {
+                var statement = ps.Bind(st.id, st.productId, st.stockInDate, st.stockInAmount, st.amountAfterRestock);
+                session.Execute(statement);
+            }
+        }
 
 
     }
