@@ -42,11 +42,18 @@ namespace SEAMOrderStoreSystem
 
         protected void btnStockIn_Click(object sender, EventArgs e)
         {
+            productId = Request.QueryString["ProductId"];
+            prod = db.products.Single(x => x.id.ToString() == productId);
             int stockInAmount = Int32.Parse(txtStockIn.Text);
             StockTransaction transaction = new StockTransaction(db.stockTransactions.Count + 1, Int32.Parse(productId), 
                 DateTime.Today, stockInAmount, prod.stock + stockInAmount);
+
+            prod.stock += stockInAmount;
+            db.updateProducts();
+
             db.stockTransactions.Add(transaction);
             db.updateStockTransactions();
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

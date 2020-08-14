@@ -13,26 +13,40 @@
 
     <h1 class="text-center">Product Details</h1>
     <hr>
-    <asp:TextBox runat="server" ID="txtProdID" ReadOnly="true"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtProdName"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtPrice" TextMode="Number"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtCategory"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtManufacturer"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtSupplier"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtDesc"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtComment"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtLocation"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtStock" TextMode="Number"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtReorderLv" TextMode="Number"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtTargetStock" TextMode="Number"></asp:TextBox>
-    <asp:TextBox runat="server" ID="txtStatus"></asp:TextBox>
-
+    Product ID:
+    <asp:TextBox runat="server" ID="txtProdID" ReadOnly="true"></asp:TextBox><br />
+    Product Name:
+    <asp:TextBox runat="server" ID="txtProdName"></asp:TextBox><br />
+    Product Price:
+    <asp:TextBox runat="server" ID="txtPrice" TextMode="Number"></asp:TextBox><br />
+    Category:
+    <asp:TextBox runat="server" ID="txtCategory"></asp:TextBox><br />
+    Manufacturer:
+    <asp:TextBox runat="server" ID="txtManufacturer"></asp:TextBox><br />
+    Supplier:
+    <asp:TextBox runat="server" ID="txtSupplier"></asp:TextBox><br />
+    Description:
+    <asp:TextBox runat="server" ID="txtDesc"></asp:TextBox><br />
+    Comment:
+    <asp:TextBox runat="server" ID="txtComment"></asp:TextBox><br />
+    Location:
+    <asp:TextBox runat="server" ID="txtLocation"></asp:TextBox><br />
+    Stock:
+    <asp:TextBox runat="server" ID="txtStock" TextMode="Number" ReadOnly="true"></asp:TextBox><br />
+    Reorder Level:
+    <asp:TextBox runat="server" ID="txtReorderLv" TextMode="Number"></asp:TextBox><br />
+    Target Stock:
+    <asp:TextBox runat="server" ID="txtTargetStock" TextMode="Number"></asp:TextBox><br />
+    Status:
+    <asp:TextBox runat="server" ID="txtStatus"></asp:TextBox><br />
+    <hr />
     <h4>Stock In</h4>
     <label>Stock In Amount:</label>
     <asp:TextBox runat="server" ID="txtStockIn" TextMode="Number"></asp:TextBox>
     <asp:Button runat="server" ID="btnStockIn" Text="Confirm" OnClick="btnStockIn_Click"/>
-
-    <asp:GridView ID="gvTransactions" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gvTransactions_SelectedIndexChanged">
+    <hr />
+    <h4>Transaction History</h4>
+    <asp:GridView ID="gvTransactions" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="false">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:TemplateField HeaderText="No." HeaderStyle-Width="5%" ItemStyle-Width="5%">
@@ -42,7 +56,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Stock In Date" HeaderStyle-Width="40%" ItemStyle-Width="40%">
                 <ItemTemplate>
-                    <asp:Label Text='<%# ((DateTime)Eval("date")).ToShortDateString() %>' runat="server"></asp:Label>
+                    <asp:Label Text='<%# ((DateTime)Eval("stockInDate")).ToShortDateString() %>' runat="server"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Stock In Amount" HeaderStyle-Width="15%" ItemStyle-Width="15%">

@@ -139,7 +139,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
             {
                 int id = row.GetValue<int>("id");
                 int productId = row.GetValue<int>("product_id");
-                DateTime stockInDate = row.GetValue<DateTime>("stock_in_date");
+                DateTime stockInDate = row.GetValue<LocalDate>("stock_in_date").ToDateTimeOffset().DateTime;
                 int stockInAmount = row.GetValue<int>("stock_in_amount");
                 int amounAfterRestock = row.GetValue<int>("amount_after_restock");
                 StockTransaction stockTransaction = new StockTransaction(id, productId, stockInDate, stockInAmount, amounAfterRestock);
@@ -198,7 +198,7 @@ namespace SEAMOrderStoreSystem.DataAcesss
 
             foreach (var st in stockTransactions)
             {
-                var statement = ps.Bind(st.id, st.productId, st.stockInDate, st.stockInAmount, st.amountAfterRestock);
+                var statement = ps.Bind(st.id, st.productId, new LocalDate(st.stockInDate.Year, st.stockInDate.Month, st.stockInDate.Day), st.stockInAmount, st.amountAfterRestock);
                 session.Execute(statement);
             }
         }

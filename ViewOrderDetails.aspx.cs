@@ -124,7 +124,6 @@ namespace SEAMOrderStoreSystem
             //popup
             divPopup.Visible = true;
 
-
         }
 
 
