@@ -29,17 +29,17 @@
             <div class="col-lg border-right">
                 <label style="font-weight: 500">Date </label>
                 <br />
-                <asp:TextBox ID="txtDate" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter date (dd/mm/yyyy)"></asp:TextBox>
+                <asp:TextBox ID="txtDate" CssClass="form-control" runat="server" type="text" placeholder="Enter date (dd/mm/yyyy)"></asp:TextBox>
             </div>
             <div class="col-lg border-right">
                 <label style="font-weight: 500">Salesman </label>
                 <br />
-                <asp:TextBox ID="txtStaff" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter salesman name"></asp:TextBox>
+                <asp:TextBox ID="txtStaff" CssClass="form-control" runat="server" type="text" placeholder="Enter salesman name"></asp:TextBox>
             </div>
             <div class="col-lg border-right">
                 <label style="font-weight: 500">Customer </label>
                 <br />
-                <asp:TextBox ID="txtCustName" CssClass="form-control" runat="server" class="modalInput" type="text" placeholder="Enter customer name"></asp:TextBox>
+                <asp:TextBox ID="txtCustName" CssClass="form-control" runat="server" type="text" placeholder="Enter customer name"></asp:TextBox>
             </div>
             <div class="col-lg-1 pr-0">
                 <br />

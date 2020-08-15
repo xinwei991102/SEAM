@@ -82,8 +82,6 @@ namespace SEAMOrderStoreSystem
             gvOrder.DataBind();
         }
 
-
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             updateTable();

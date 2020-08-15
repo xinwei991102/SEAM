@@ -84,7 +84,6 @@ namespace SEAMOrderStoreSystem.DataAcesss
             var rs = session.Execute("select * from staff");
             foreach (var row in rs)
             {
-                
                 string name = row.GetValue<string>("name");
                 string email = row.GetValue<string>("email");
                 string pass = row.GetValue<string>("password");
@@ -125,8 +124,9 @@ namespace SEAMOrderStoreSystem.DataAcesss
             var rs = session.Execute("select * from salesman");
             foreach (var row in rs)
             {
+                string email = row.GetValue<string>("email");
                 string name = row.GetValue<string>("name");
-                Salesman salesman = new Salesman(name);
+                Salesman salesman = new Salesman(name,email);
                 salesmen.Add(salesman);
             }
         }
@@ -166,6 +166,17 @@ namespace SEAMOrderStoreSystem.DataAcesss
             foreach (var staff in staffs)
             {
                 var statement = ps.Bind(staff.name,staff.email,staff.password,staff.role);
+                session.Execute(statement);
+            }
+        }
+
+        public void updateSalesmen()
+        {
+            var ps = session.Prepare("insert into salesman (email,name) values (?,?)");
+
+            foreach (var salesman in salesmen)
+            {
+                var statement = ps.Bind(salesman.email, salesman.name);
                 session.Execute(statement);
             }
         }
