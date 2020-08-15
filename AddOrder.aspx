@@ -55,7 +55,7 @@
         <h4>Order Items</h4>
 
         <div>
-            <asp:GridView ID="gvOrderQTY" CssClass="table" runat="server" AutoGenerateColumns="False" Style="margin-bottom: 0px; width: 97%;" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="gvOrderQTY" CssClass="table" runat="server" AutoGenerateColumns="False" Style="margin-bottom: 0px; width: 100%;" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:TemplateField HeaderText="No." HeaderStyle-Width="10%" ItemStyle-Width="10%">
@@ -79,6 +79,10 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Subtotal (RM)" HeaderStyle-Width="12.5%" ItemStyle-Width="12.5%">
+                        <ItemTemplate>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText=" " HeaderStyle-Width="3%" ItemStyle-Width="3%">
                         <ItemTemplate>
                         </ItemTemplate>
                     </asp:TemplateField>

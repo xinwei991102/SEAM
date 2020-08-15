@@ -25,6 +25,7 @@
 
     <h1 class="text-center">Add Staff</h1>
     <hr>
+
     <label><b>Role:</b></label>
     <asp:DropDownList ID="ddlRole" runat="server" Width="100%" Height="30px" Required="true" OnSelectedIndexChanged="ddlRole_SelectedIndexChanged" AutoPostBack="true">
         <asp:ListItem Text="Manager" Value="Manager"></asp:ListItem>

@@ -9,7 +9,7 @@
         </nav>
         <hr />
     </div>
-    <h1 class="text-center mb-4">Alimama Sdn Bhd Order and Store System</h1>
+    <h1 class="text-center mb-4">Millos Trading Order and Store System</h1>
     <hr />
     <div class="row text-center">
         <div class="col-md border rounded p-4 mx-2">

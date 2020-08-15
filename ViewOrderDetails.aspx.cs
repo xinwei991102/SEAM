@@ -128,12 +128,6 @@ namespace SEAMOrderStoreSystem
         }
 
 
-        protected void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(Request.Url.AbsoluteUri);
-        }
-
-
         protected void btnCreatePDF_Click(object sender, EventArgs e)
         {
             int orderID = int.Parse(Request.QueryString["OrderID"]);
@@ -157,16 +151,23 @@ namespace SEAMOrderStoreSystem
                 ttotal += total;
             }
 
-
             //create html
-            string htmlContent = "<html><head><style>.detail-table, .detail-table th, .detail-table td{border: 1px solid;padding: 5px;text-align:right;            }.display-table td{                padding-right:10px;            border: 0px;                vertical-align:top;            }            body{            padding: 10%;            }</style></head><body><div style='width:100%;text-align:center;' > <h1> Millos Trading </h1>    123, Hill Street,<br/>    31000 Perak,<br />    Malaysia.<br />    <br />    Tel : 605-5342353 <br />    Fax : 605-5342352 <br />    </div>    <br />    <table class='display-table' >	<tr>		<td>Order ID</td>		<td>:</td>		<td>" +
-                order.id + "</td>	</tr>	<tr>		<td>Date</td>		<td>:</td>		<td>" +
-                order.date.ToShortDateString() + "</td>	</tr>	<tr>		<td>Salesperson</td>		<td>:</td>		<td>" +
-                order.salesmanName + "</td>	</tr>	<tr>		<td>Status</td>		<td>:</td>		<td>" +
-                order.status + "</td>	</tr>	<tr>		<td>Buyer</td>		<td>:</td>		<td>            " +
-                order.custName + "<br/>            " +
-                order.custEmail + "<br/>			<br/>            " +
-                order.custAddress.Replace(",", ",<br/>") + "</td>	</tr></table><br/>Order Details : <br/><table class='detail-table' style='width:100%'>	<thead>		<th>No</th>		<th>Product</th>		<th>Quantity</th>		<th>Unit Price</th>		<th>Discount</th>		<th>Total</th>	</thead>	</th>";
+            string htmlContent = "<html><head><style>.detail-table, .detail-table th, .detail-table td{border: 1px solid;padding: 5px;text-align:left; border-collapse: collapse;           }.display-table td{                padding-right:10px;            border: 0px;                vertical-align:top;            }            body{            padding: 10%;            }</style></head>" +
+                "<body><div style='width:100%;text-align:center;' > " +
+                "<h2> Millos Trading </h2>    123, Hill Street,<br/>    31000 Perak,<br />    Malaysia.<br />    <br />    Tel : 605-5342353 <br />    Fax : 605-5342352 <br />    </div>  " +
+                "<h2>Invoice</h2>" +
+                "<table class='display-table' >	" +
+                "<tr>		<td>Order ID</td>		<td>:</td>		" +
+                    "<td>" + order.id + "</td>	</tr>	" +
+                "<tr>		<td>Date</td>		<td>:</td>		" +
+                    "<td>" + order.date.ToShortDateString() + "</td>	</tr>	" +
+                "<tr>		<td>Salesperson</td>		<td>:</td>		" +
+                    "<td>" + order.salesmanName + "</td>	</tr>" +
+                "<tr>		<td>Buyer</td>		<td>:</td>		" +
+                    "<td>" + order.custName + " (" + order.custEmail + ")</tr>" +
+                 "<tr> <td>Deliver to</td> <td>:</td> <td>" + order.custAddress.Replace(",", ",<br/>") + "</td>	</tr>" +
+                "</table>" +
+                "<br/>Order Details : <br/><table class='detail-table' style='width:100%'>	<thead>		<th>No</th>		<th>Product</th>		<th>Quantity</th>		<th>Unit Price</th>		<th>Discount</th>		<th>Total</th>	</thead>	</th>";
 
             int num = 1;
             foreach(OrderProd op in orderProds)
@@ -176,12 +177,12 @@ namespace SEAMOrderStoreSystem
             }
             
             htmlContent += "<tr><td></td><td></td><td></td><td></td><td>Total</td><td>" + ttotal.ToString("0.00") + "</td></tr></table></body></html>";
-            string filePath = Path.Combine(Server.MapPath("~"), "GeneratedOrder.pdf");            
+            string filePath = Path.Combine(Server.MapPath("~"), "OrderInvoice" + orderID + ".pdf");            
             CreatePDFFromHtml(htmlContent, filePath);
 
             HttpResponse res = HttpContext.Current.Response;
             res.Clear();
-            res.AppendHeader("content-disposition", "attachment; filename=GeneratedOrderID_" + txtOrderID.Text + ".pdf");
+            res.AppendHeader("content-disposition", "attachment; filename=OrderInvoice" + txtOrderID.Text + ".pdf");
             res.ContentType = "application/octet-stream";
             res.WriteFile(filePath);
             res.Flush();
@@ -194,12 +195,73 @@ namespace SEAMOrderStoreSystem
             htmlToPdf.GeneratePdf(htmlContent, null, filePath);
 
 
-
         }
 
         protected void btnCreateDO_Click(object sender, EventArgs e)
         {
+            int orderID = int.Parse(Request.QueryString["OrderID"]);
+            Order order = db.orders.Single(x => x.id == orderID);
+            List<OrderLine> orderLines = db.orderLines.Where(x => x.orderID == orderID).ToList();
 
+
+            decimal ttotal = 0;
+            List<OrderProd> orderProds = new List<OrderProd>();
+            for (int i = 0; i < orderLines.Count; i++)
+            {
+                OrderLine orderQTY = orderLines.ElementAt(i);
+                Product product = db.products.Single(x => x.id == orderQTY.productID);
+                string prod = product.name;
+                int qty = orderQTY.quantity;
+                decimal price = product.price;
+                decimal discount = orderQTY.discount;
+                decimal total = qty * price * (1 - discount);
+                OrderProd orderProd = new OrderProd(i + 1, prod, qty, price, discount, total);
+                orderProds.Add(orderProd);
+                ttotal += total;
+            }
+
+            //create html
+            string htmlContent = "<html><head><style>.detail-table, .detail-table th, .detail-table td{border: 1px solid;padding: 5px;text-align:left; border-collapse: collapse;           }.display-table td{                padding-right:10px;            border: 0px;                vertical-align:top;            }            body{            padding: 10%;            }</style></head>" +
+                "<body><div style='width:100%;text-align:center;' > " +
+                "<h2> Millos Trading </h2>    123, Hill Street,<br/>    31000 Perak,<br />    Malaysia.<br />    <br />    Tel : 605-5342353 <br />    Fax : 605-5342352 <br />    </div>  " +
+                "<h2>Delivery Order</h2>" +
+                "<table class='display-table' >	" +
+                "<tr>		<td>Order ID</td>		<td>:</td>		" +
+                    "<td>" +  order.id + "</td>	</tr>	" +
+                "<tr>		<td>Date</td>		<td>:</td>		" +
+                    "<td>" +  order.date.ToShortDateString() + "</td>	</tr>	" +
+                "<tr>		<td>Salesperson</td>		<td>:</td>		" +
+                    "<td>" +  order.salesmanName + "</td>	</tr>" +
+                "<tr>		<td>Buyer</td>		<td>:</td>		" +
+                    "<td>" + order.custName + " (" + order.custEmail + ")</tr>" +
+                 "<tr> <td>Deliver to</td> <td>:</td> <td>" +   order.custAddress.Replace(",", ",<br/>") + "</td>	</tr>" +
+                "</table>" +
+                "<br/>Order Details : <br/>" +
+                "<table class='detail-table' style='width:100%'>	" +
+                "<thead>		<th>No</th>		<th>Product</th>		<th>Quantity</th>		</thead>	</th>";
+
+            int num = 1;
+            foreach (OrderProd op in orderProds)
+            {
+                htmlContent += "<tr><td>" + num + "</td><td>" + op.prod + "</td><td>" + op.qty + "</td></tr>";
+                num++;
+            }
+
+            string filePath = Path.Combine(Server.MapPath("~"), "DeliveryOrder" + orderID + ".pdf");
+            CreatePDFFromHtml(htmlContent, filePath);
+
+            HttpResponse res = HttpContext.Current.Response;
+            res.Clear();
+            res.AppendHeader("content-disposition", "attachment; filename=DeliveryOrder" + txtOrderID.Text + ".pdf");
+            res.ContentType = "application/octet-stream";
+            res.WriteFile(filePath);
+            res.Flush();
+            res.End();
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ViewOrderDetails.aspx?OrderID=" + orderID);
         }
     }
 }

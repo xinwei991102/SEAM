@@ -93,7 +93,7 @@ namespace SEAMOrderStoreSystem
         {
             string email = ((Label)gvStaff.SelectedRow.Cells[1].Controls[1]).Text;
             string role = ((Label)gvStaff.SelectedRow.Cells[3].Controls[1]).Text;
-            Response.Redirect("~/ViewStaffDetails.aspx?Email=" + email + "?Role=" + role);
+            Response.Redirect("~/ViewStaffDetails.aspx?Email=" + email + "&Role=" + role);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

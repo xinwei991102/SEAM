@@ -24,7 +24,7 @@ namespace SEAMOrderStoreSystem
 
         protected void btnViewStaff_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ViewStaffDetails.aspx?Email=" + txtEmail.Text + "?Role=" + ddlRole.SelectedValue);
+            Response.Redirect("~/ViewStaffDetails.aspx?Email=" + txtEmail.Text + "&Role=" + ddlRole.SelectedValue);
         }
 
         protected void btnAddStaff_Click(object sender, EventArgs e)
