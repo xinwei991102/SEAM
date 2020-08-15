@@ -261,6 +261,7 @@ namespace SEAMOrderStoreSystem
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
+            orderID = int.Parse(Request.QueryString["OrderID"]);
             Response.Redirect("~/ViewOrderDetails.aspx?OrderID=" + orderID);
         }
     }

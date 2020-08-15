@@ -15,12 +15,14 @@ namespace SEAMOrderStoreSystem
         private class ProdSales
         {
             public string name { get; set; }
+            public int qty { get; set; }
             public decimal total { get; set; }
 
             public ProdSales(string name)
             {
                 this.name = name;
                 total = 0;
+                qty = 0;
             }
 
         }
@@ -90,8 +92,8 @@ namespace SEAMOrderStoreSystem
                 {
                     prodSales.Add(new ProdSales(prod.name));
                 }
-                //prodSales.Single(x => x.name == prod.name).total += (prodOrder.quantity * prod.price * (1 - prodOrder.discount));
-                prodSales.Single(x => x.name == prod.name).total += prodOrder.quantity;
+                prodSales.Single(x => x.name == prod.name).total += (prodOrder.quantity * prod.price * (1 - prodOrder.discount));
+                prodSales.Single(x => x.name == prod.name).qty += prodOrder.quantity;
 
                 Order order = db.orders.Single(x => x.id == prodOrder.orderID);
                 if (orderTotals.Count(x=>x.orderId == order.id) == 0)
@@ -119,6 +121,7 @@ namespace SEAMOrderStoreSystem
             }
             string[] prodNames = new string[prodSales.Count];
             decimal[] prodTotals = new decimal[prodSales.Count];
+            int[] prodQtys = new int[prodSales.Count];
 
             string[] salesmanNames = new string[salesmanSales.Count];
             decimal[] salesmanTotals = new decimal[salesmanSales.Count];
@@ -127,6 +130,7 @@ namespace SEAMOrderStoreSystem
             {
                 prodNames[i] = prodSales.ElementAt(i).name;
                 prodTotals[i] = prodSales.ElementAt(i).total;
+                prodQtys[i] = prodSales.ElementAt(i).qty;
             }
 
             for (int i = 0; i < salesmanSales.Count; i++)
@@ -139,6 +143,10 @@ namespace SEAMOrderStoreSystem
             chtProdSales.Series[0].Points.DataBindXY(prodNames, prodTotals);
             gvProdSales.DataSource = prodSales;
             gvProdSales.DataBind();
+
+            chtProdQty.Series[0].Points.DataBindXY(prodNames, prodQtys);
+            gvProdQty.DataSource = prodSales;
+            gvProdQty.DataBind();
 
             chtSalesman.Series[0].Points.DataBindXY(salesmanNames, salesmanTotals);
             gvSalesman.DataSource = salesmanSales;

@@ -1,4 +1,5 @@
-﻿using SEAMOrderStoreSystem.DataAcesss;
+﻿using Microsoft.Ajax.Utilities;
+using SEAMOrderStoreSystem.DataAcesss;
 using SEAMOrderStoreSystem.Entities;
 using System;
 using System.Collections.Generic;
@@ -38,8 +39,20 @@ namespace SEAMOrderStoreSystem
                 updateTable();
             }
 
+            if (!Page.User.Identity.Name.IsNullOrWhiteSpace())
+            {
+                string username = Page.User.Identity.Name;
+                Staff loggedInStaff = db.staffs.Single(x => x.email == username);
+                if (loggedInStaff.role == "Manager")
+                {
+                    ViewReport.Visible = true;
+                }
+                else
+                {
+                    ViewReport.Visible = false;
+                }
+            }
         }
-
         protected void gvOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = int.Parse(((Label)gvOrder.SelectedRow.Cells[0].Controls[1]).Text);

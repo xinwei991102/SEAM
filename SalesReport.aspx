@@ -46,9 +46,9 @@
             <div class="col">
                 <asp:Chart ID="chtProdSales" runat="server"
                     BorderlineWidth="0" Height="300px" Palette="None"
-                    Width="500px">
+                    Width="330px">
                     <Titles>
-                        <asp:Title Text="Quantity Sold per Product"></asp:Title>
+                        <asp:Title Text="Sales (RM) per Product"></asp:Title>
                     </Titles>
                     <Series>
                         <asp:Series Name="Series1" YValuesPerPoint="6">
@@ -59,7 +59,7 @@
                         </asp:ChartArea>
                     </ChartAreas>
                 </asp:Chart>
-                <asp:GridView ID="gvProdSales" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <asp:GridView ID="gvProdSales" Font-Size="Small" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField HeaderText="Product">
@@ -67,7 +67,7 @@
                                 <asp:Label Text='<%# Eval("name") %>' runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Quantity Sold">
+                        <asp:TemplateField HeaderText="Total Sales (RM)">
                             <ItemTemplate>
                                 <asp:Label Text='<%# Eval("total") %>' runat="server"></asp:Label>
                             </ItemTemplate>
@@ -86,9 +86,51 @@
                 </asp:GridView>
             </div>
             <div class="col">
+                <asp:Chart ID="chtProdQty" runat="server"
+                    BorderlineWidth="0" Height="300px" Palette="None"
+                    Width="330px">
+                    <Titles>
+                        <asp:Title Text="Quantity Sold per Product"></asp:Title>
+                    </Titles>
+                    <Series>
+                        <asp:Series Name="Series1" YValuesPerPoint="6">
+                        </asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="ChartArea1">
+                        </asp:ChartArea>
+                    </ChartAreas>
+                </asp:Chart>
+                <asp:GridView ID="gvProdQty" Font-Size="Small" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="Product">
+                            <ItemTemplate>
+                                <asp:Label Text='<%# Eval("name") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Quantity Sold">
+                            <ItemTemplate>
+                                <asp:Label Text='<%# Eval("qty") %>' runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EditRowStyle BackColor="#2461BF" />
+                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#EFF3FB" />
+                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                </asp:GridView>
+            </div>
+            <div class="col">
                 <asp:Chart ID="chtSalesman" runat="server"
                     BorderlineWidth="0" Height="300px" Palette="None"
-                    Width="500px">
+                    Width="330px">
                     <Titles>
                         <asp:Title Text="Sales (RM) per Salesman"></asp:Title>
                     </Titles>
@@ -102,7 +144,7 @@
                     </ChartAreas>
                 </asp:Chart>
 
-                <asp:GridView ID="gvSalesman" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <asp:GridView ID="gvSalesman" Font-Size="Small" CssClass="table" EnableRowCache="true" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField HeaderText="Salesman">

@@ -85,6 +85,7 @@ namespace SEAMOrderStoreSystem
             prod.description = txtDesc.Text;
             prod.comment = txtComment.Text;
             prod.location = txtLocation.Text;
+            prod.stock = Int32.Parse(txtStock.Text);
             prod.reorderLevel = Int32.Parse(txtReorderLv.Text);
             prod.targetStock = Int32.Parse(txtTargetStock.Text);
 

@@ -107,7 +107,7 @@
             <div class="col">
                 <asp:Button ID="btnAdd" type="button" UseSubmitBehavior="false" runat="server" OnClick="btnAdd_Click" Text="Create Order" class="btn btn-primary" Style="width: 100%;" />
             </div>
-            <div class="col">
+            <div class="col" runat="server" id="ViewReport">
                 <asp:Button ID="btnViewSalesReport" runat="server" Text="View Sales Report" UseSubmitBehavior="false" OnClick="btnViewSalesReport_Click" class="btn btn-secondary" Style="width: 100%;" />
             </div>
         </div>

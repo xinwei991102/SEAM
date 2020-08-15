@@ -79,7 +79,7 @@
         <div class="row mb-3">
             <div class="col">
                 <label><b>Stock:</b></label>
-                <asp:TextBox runat="server" ID="txtStock" TextMode="Number" ReadOnly="true" BorderStyle="None" Width="100%"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtStock" TextMode="Number" Width="100%"></asp:TextBox>
             </div>
             <div class="col">
                 <label><b>Reorder Level:</b></label>
