@@ -23,7 +23,7 @@
         <hr />
     </div>
 
-    <h1 class="text-center">View Order Details</h1>
+    <h1 class="text-center">Order Details</h1>
     <hr>
 
     <h4>Order Info</h4>
