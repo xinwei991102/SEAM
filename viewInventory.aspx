@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col">
                 <hr>
-                <asp:GridView ID="gvProducts" CssClass="table" Font-Size="Small" EnableRowCache="true" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <asp:GridView ID="gvProducts" CssClass="mb-3" Font-Size="small" EnableRowCache="true" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged" runat="server" AutoGenerateColumns="False" CellPadding="2" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField HeaderText="ID">

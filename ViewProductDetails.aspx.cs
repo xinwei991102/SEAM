@@ -98,6 +98,12 @@ namespace SEAMOrderStoreSystem
             }
 
             db.updateProducts();
+            divPopup.Visible = true;
+        }
+
+        protected void btnViewProd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ViewProductDetails.aspx?ProductId=" + Request.QueryString["ProductId"]);
         }
     }
 }

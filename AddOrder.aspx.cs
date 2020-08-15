@@ -25,7 +25,6 @@ namespace SEAMOrderStoreSystem
                 txtDate.Text = DateTime.Now.ToShortDateString();
             }
 
-            divPopup.Visible = false;
         }
 
         private void BindDDLStaff()
@@ -40,7 +39,7 @@ namespace SEAMOrderStoreSystem
 
         private void BindDDLProduct()
         {
-            List<Product> prodList = new List<Product>(db.products);
+            List<Product> prodList = new List<Product>(db.products.Where(x=>x.status=="available"));
             prodList = prodList.OrderBy(x => x.name).ToList();
             ddlProduct.DataSource = prodList;
             ddlProduct.DataTextField = "name";

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Create Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddOrder.aspx.cs" Inherits="SEAMOrderStoreSystem.AddOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="divPopup" runat="server">
+    <div id="divPopup" runat="server" visible="false">
         <div class="container p-5 mx-auto rounded border text-center"
             style="z-index: 2100; background-color: white; opacity: 1; position: fixed; width: 400px; left: 50%; transform: translate(-50%, 0); top: 30%;">
             <h4>Your order has been recorded.</h4>

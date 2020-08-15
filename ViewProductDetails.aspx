@@ -1,6 +1,17 @@
 ﻿<%@ Page Title="Product Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewProductDetails.aspx.cs" Inherits="SEAMOrderStoreSystem.ViewProductDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="divPopup" runat="server" visible="false">
+        <div class="container p-5 mx-auto rounded border text-center"
+            style="z-index: 2100; background-color: white; opacity: 1; position: fixed; width: 400px; left: 50%; transform: translate(-50%, 0); top: 30%;">
+            <h4>Your changes has been saved.</h4>
+            <br />
+            <asp:Button ID="btnViewProd" CssClass="btn btn-primary" runat="server" UseSubmitBehavior="false" Text="View The Product" OnClick="btnViewProd_Click"/>
+        </div>
+        <div style="background-color: black; position: fixed; top: 0; bottom: 0; left: 0; right: 0; opacity: 0.8; z-index: 2000;">
+        </div>
+    </div>
+
     <div class="text-center">
         <nav aria-label="breadcrumb" style="display: inline-block;">
             <ol class="breadcrumb mb-0 py-0" style="background-color: transparent;">
@@ -84,7 +95,7 @@
                 <asp:Button ID="btnEditProduct" runat="server" Style="width: 100%;" class="btn btn-primary" Text="Save Changes" OnClick="btnEditProduct_Click" />
             </div>
             <div class="col">
-                <asp:HyperLink runat="server" ID="linkRefresh" CssClass="btn btn-secondary" style="width:100%;" >Reset</asp:HyperLink>
+                <asp:HyperLink runat="server" ID="linkRefresh" CssClass="btn btn-secondary" Style="width: 100%;">Reset</asp:HyperLink>
             </div>
         </div>
     </div>

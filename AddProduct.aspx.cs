@@ -55,11 +55,17 @@ namespace SEAMOrderStoreSystem
 
             db.products.Add(prod);
             db.updateProducts();
+            divPopup.Visible = true;
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddProduct.aspx");
+        }
+
+        protected void btnViewProd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ViewProductDetails.aspx?ProductId=" + db.products.Count);
         }
     }
 }
